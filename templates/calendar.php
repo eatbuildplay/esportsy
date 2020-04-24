@@ -16,7 +16,11 @@
           $supportedGames = [
             'Dota 2',
             'LoL',
-            'CS:GO'
+            'CS:GO',
+            'SCII',
+            'OW',
+            'Hearthstone',
+            'FIFA'
           ];
           foreach( $calendarData->games as $game ):
 
@@ -35,6 +39,20 @@
   </header>
 
   <section>
+
+    <?php
+      if( !empty( $calendarData->matches )) :
+        foreach( $calendarData->matches as $match ): ?>
+
+        <article>
+          <h1><?php //print $match->tournament_title; ?></h1>
+          <h2><?php print $match->series_title; ?></h2>
+          <h4>Match ID: <?php print $match->id; ?></h4>
+          <h4>Series ID: <?php print $match->series_id; ?></h4>
+
+        </article>
+
+      <?php endforeach; endif; ?>
 
     <article>
       <h5>Wednesday, April 22</h5>
@@ -58,6 +76,8 @@
 
 header {
   background: #454850;
+  padding: 20px 40px 20px 40px;
+  height: 70px;
 }
 .header-left {
   width: 20%;
@@ -102,20 +122,45 @@ ul.top-menu li {
 }
 
 .filter-menu li img {
-  width: 70px;
+  width: 50px;
 }
 
 
 section {
   background: #F0F1F5;
+  padding: 40px;
 }
 
 </style>
 
 <script>
 
-var calendar = {
+(function($) {
 
-}
+  var calendar = {
+
+    init: function() {
+
+      $('.filter-menu li').on('click', function() {
+
+        console.log('filtering...')
+
+      })
+
+      $('.top-menu li').on('click', function() {
+
+        console.log('switch...')
+
+      })
+
+    }
+
+  }
+
+  calendar.init()
+
+})( jQuery );
+
+
 
 </script>

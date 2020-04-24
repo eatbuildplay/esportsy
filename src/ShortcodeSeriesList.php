@@ -14,7 +14,7 @@ class ShortcodeSeriesList extends Shortcode {
     parent::__construct();
   }
 
-  public function fetchseriesList() {
+  public function fetchSeriesList() {
     $api = new AbiosApi();
     return $api->fetchSeriesList();
   }

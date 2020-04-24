@@ -22,13 +22,41 @@ class AbiosApi {
     return false;
   }
 
+	public function fetchTeamsList() {
+    $token = $this->fetchToken();
+    $vars = [ 'access_token' => $token ];
+    $response = $this->call( '/teams', 'get', $vars );
+    $teams = $response->data->data;
+    if( $response->code == 200 ) {
+      return $teams;
+    }
+    return false;
+  }
+
   public function fetchSeriesList() {
     $token = $this->fetchToken();
     $vars = [
       'access_token' => $token,
-      'with[]' => 'matches'
+      'with' => array(
+				'matches',
+				'tournament'
+			),
     ];
     $response = $this->call( '/series', 'get', $vars );
+
+    $dataObjects = $response->data->data;
+    if( $response->code == 200 ) {
+      return $dataObjects;
+    }
+    return false;
+  }
+
+	public function fetchTournamentList() {
+    $token = $this->fetchToken();
+    $vars = [
+      'access_token' => $token
+    ];
+    $response = $this->call( '/tournaments', 'get', $vars );
     $dataObjects = $response->data->data;
     if( $response->code == 200 ) {
       return $dataObjects;
@@ -44,7 +72,17 @@ class AbiosApi {
 
     // set options for get to enable vars to be added
     if( $method == 'get' ) {
+
       $data = http_build_query($vars);
+			$data = preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $data);
+
+			// test
+			/*
+			if( $endpoint == '/series' ) {
+				$data = 'access_token='.$vars['access_token'].'&with%5B%5D=matches&with%5B%5D=tournament';
+				print $data;
+			}*/
+
       $url = $this->baseUrl . $endpoint . '?' . $data;
     } else {
       $url = $this->baseUrl . $endpoint;

@@ -2,7 +2,7 @@
 
 namespace Esportsy;
 
-class Shortcodecalendar extends Shortcode {
+class ShortcodeCalendar extends Shortcode {
 
   public $tag = 'espy-calendar';
 
@@ -17,6 +17,25 @@ class Shortcodecalendar extends Shortcode {
   public function fetchCalendarData() {
     $calendarData = new \stdClass;
     $api = new AbiosApi();
+
+    // extract matches from series data
+    $seriesList = $api->fetchSeriesList();
+
+    $matches = [];
+    foreach( $seriesList as $series ) {
+
+      if( !empty($series->matches)) {
+
+        foreach( $series->matches as $match ) {
+          // add more data to the matches
+          $match->series_title = $series->title;
+          //$match->tournament_title = $series->tournament->title;
+          $matches[] = $match;
+        }
+      }
+    }
+
+    $calendarData->matches = $matches;
     $calendarData->games = $api->fetchGamesList();
     return $calendarData;
   }
