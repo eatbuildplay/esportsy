@@ -27,10 +27,12 @@ class ShortcodeCalendar extends Shortcode {
       if( !empty($series->matches)) {
 
         foreach( $series->matches as $match ) {
+
           // add more data to the matches
           $match->series_title = $series->title;
-          //$match->tournament_title = $series->tournament->title;
+          $match->tournament_title = $series->tournament->title;
           $matches[] = $match;
+          
         }
       }
     }
