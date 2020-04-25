@@ -28,16 +28,16 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
-    new ShortcodeGamesList();
+    //new ShortcodeGamesList();
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesList.php' );
-    new ShortcodeSeriesList();
+    //new ShortcodeSeriesList();
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeTournamentList.php' );
-    new ShortcodeTournamentList();
+    //new ShortcodeTournamentList();
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeTeamsList.php' );
-    new ShortcodeTeamsList();
+    //new ShortcodeTeamsList();
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeCalendar.php' );
     new ShortcodeCalendar();
