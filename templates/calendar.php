@@ -153,6 +153,25 @@ section {
 
       })
 
+    },
+
+    draw: function() {
+
+      var params = {
+
+      }
+
+      data = {
+        action: 'espy-calendar-draw',
+        params: params
+      }
+      $.post( espy.ajaxurl, data, function( response ) {
+
+        response = JSON.PARSE(response);
+        console.log( response )
+
+      });
+
     }
 
   }

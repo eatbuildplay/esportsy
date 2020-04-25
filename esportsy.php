@@ -42,6 +42,35 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/ShortcodeCalendar.php' );
     new ShortcodeCalendar();
 
+    // do init at init
+    add_action('init', [$this, 'init']);
+
+  }
+
+  public function init() {
+
+    // enqueue scripts
+    add_action('wp_enqueue_scripts', [$this, 'scripts']);
+
+  }
+
+  public function scripts() {
+
+    // main js
+    wp_enqueue_script(
+      'esportsy-main-js',
+      ESPORTSY_URL . 'assets/esportsy.js',
+      array( 'jquery' ),
+      '1.0.0',
+      true
+    );
+
+    // localize ajax url
+    $localizedData = [
+      'ajaxurl' => admin_url( 'admin-ajax.php' )
+    ];
+    wp_localize_script( 'esportsy-main-js', 'espy', $localizedData );
+
   }
 
  }
