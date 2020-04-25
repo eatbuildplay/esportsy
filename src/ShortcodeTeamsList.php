@@ -9,7 +9,7 @@ class ShortcodeTeamsList extends Shortcode {
   public function __construct() {
     $this->templateName = 'teams-list';
     $this->templateData = [
-      'team' => $this->fetchTeamsList()
+      'teams' => $this->fetchTeamsList()
     ];
     parent::__construct();
   }
