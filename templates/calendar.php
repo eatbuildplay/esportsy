@@ -45,7 +45,7 @@
         foreach( $calendarData->matches as $match ): ?>
 
         <article>
-          <h1><?php //print $match->tournament_title; ?></h1>
+          <h1><?php print $match->tournament_title; ?></h1>
           <h2><?php print $match->series_title; ?></h2>
           <h4>Match ID: <?php print $match->id; ?></h4>
           <h4>Series ID: <?php print $match->series_id; ?></h4>

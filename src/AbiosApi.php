@@ -34,6 +34,7 @@ class AbiosApi {
   }
 
   public function fetchSeriesList() {
+
     $token = $this->fetchToken();
     $vars = [
       'access_token' => $token,
@@ -44,11 +45,12 @@ class AbiosApi {
     ];
     $response = $this->call( '/series', 'get', $vars );
 
-    $dataObjects = $response->data->data;
     if( $response->code == 200 ) {
+			$dataObjects = $response->data->data;
       return $dataObjects;
     }
     return false;
+		
   }
 
 	public function fetchTournamentList() {
