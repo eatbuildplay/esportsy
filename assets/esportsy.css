@@ -1,0 +1,60 @@
+.espy-calendar {
+
+}
+
+header {
+  background: #454850;
+  padding: 20px 40px 20px 40px;
+  height: 70px;
+}
+.header-left {
+  width: 20%;
+  min-width: 120px;
+  float: left;
+}
+.header-right {
+  width: 80%;
+  min-width: 200px;
+  float: left;
+  text-align: right;
+}
+
+ul.top-menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+ul.top-menu li {
+  display: inline-block;
+  margin: 0 40px 0 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: verdana, sans-serif;
+  cursor: pointer;
+}
+
+.filter-menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.filter-menu li {
+  display: inline-block;
+  margin: 0 20px 0 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: verdana, sans-serif;
+  cursor: pointer;
+}
+
+.filter-menu li img {
+  width: 50px;
+}
+
+
+section {
+  background: #F0F1F5;
+  padding: 40px;
+}

@@ -42,6 +42,8 @@ class AbiosApi {
 				'matches',
 				'tournament'
 			),
+			'starts_after' => 'now',
+			'page' => 2
     ];
     $response = $this->call( '/series', 'get', $vars );
 

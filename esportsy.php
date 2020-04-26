@@ -56,6 +56,14 @@ class plugin {
 
   public function scripts() {
 
+    // main css
+    wp_enqueue_style(
+      'esportsy-main-css',
+      ESPORTSY_URL . 'assets/esportsy.css',
+      array(),
+      '1.0.0'
+    );
+
     // main js
     wp_enqueue_script(
       'esportsy-main-js',

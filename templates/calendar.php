@@ -1,8 +1,10 @@
 <?php
 
+/*
 print '<pre>';
-var_dump( $calendarData->matches[0] );
+var_dump( $calendarData->matches[0]->rosters );
 print '</pre>';
+*/
 
 ?>
 
@@ -47,103 +49,10 @@ print '</pre>';
 
   </header>
 
-  <section>
-
-    <?php
-      if( !empty( $calendarData->matches )) :
-        foreach( $calendarData->matches as $match ): ?>
-
-        <article>
-          <h2><?php print $match->tournament_title; ?></h2>
-          <h1><?php print $match->series_title; ?></h1>
-          <h4>Start Time: <?php print $match->start; ?></h4>
-
-          <h4>Match ID: <?php print $match->id; ?></h4>
-          <h4>Series ID: <?php print $match->series_id; ?></h4>
-
-
-        </article>
-
-      <?php endforeach; endif; ?>
-
-    <article>
-      <h5>Wednesday, April 22</h5>
-    </article>
-
-    <article>
-      <h5>Thursday, April 23</h5>
-    </article>
-
-  </section>
+  <section id="calendar-canvas"></section>
 
 </div>
 
-
-
-<style>
-
-.espy-calendar {
-
-}
-
-header {
-  background: #454850;
-  padding: 20px 40px 20px 40px;
-  height: 70px;
-}
-.header-left {
-  width: 20%;
-  min-width: 120px;
-  float: left;
-}
-.header-right {
-  width: 80%;
-  min-width: 200px;
-  float: left;
-  text-align: right;
-}
-
-ul.top-menu {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-ul.top-menu li {
-  display: inline-block;
-  margin: 0 40px 0 0;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-family: verdana, sans-serif;
-  cursor: pointer;
-}
-
-.filter-menu {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.filter-menu li {
-  display: inline-block;
-  margin: 0 20px 0 0;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-family: verdana, sans-serif;
-  cursor: pointer;
-}
-
-.filter-menu li img {
-  width: 50px;
-}
-
-
-section {
-  background: #F0F1F5;
-  padding: 40px;
-}
-
-</style>
 
 <script>
 
@@ -151,17 +60,23 @@ section {
 
   var calendar = {
 
+    canvas: $('#calendar-canvas'),
+
     init: function() {
 
       $('.filter-menu li').on('click', function() {
 
         console.log('filtering...')
 
+        calendar.draw();
+
       })
 
       $('.top-menu li').on('click', function() {
 
         console.log('switch...')
+
+        calendar.draw();
 
       })
 
@@ -174,13 +89,15 @@ section {
       }
 
       data = {
-        action: 'espy-calendar-draw',
+        action: 'espy_calendar_draw',
         params: params
       }
       $.post( espy.ajaxurl, data, function( response ) {
 
-        response = JSON.PARSE(response);
+        response = JSON.parse(response);
         console.log( response )
+
+        calendar.canvas.html( response.html );
 
       });
 
