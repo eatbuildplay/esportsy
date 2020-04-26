@@ -27,6 +27,7 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
     require_once( ESPORTSY_PATH . 'src/models/Match.php' );
+    require_once( ESPORTSY_PATH . 'src/sync/Sync.php' );
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
     //new ShortcodeGamesList();
@@ -68,13 +69,30 @@ class plugin {
 
   public function importMatches() {
 
+    return;
+
     // get the series data and parse it into matches
+    $api = new AbiosApi();
+    $matches = $api->fetchMatches();
 
     // insert each match as a post
     foreach( $matches as $matchData ) {
-      $match = new Match;
-      $match->seriesTitle = $matchData->series_title;
-      $match->save();
+
+      $match = new Match();
+      $match->matchId = $matchData->id;
+
+      $match->gameId = $matchData->game->id;
+      $match->gameTitle = $matchData->game->title;
+      $match->gameLogo = $matchData->game->images->square;
+
+      $match->tournamentId = $matchData->tournament->id;
+      $match->tournamentTitle = $matchData->tournament->title;
+
+      $match->seriesId = $matchData->series->id;
+      $match->seriesTitle = $matchData->series->title;
+
+      $match->create();
+
     }
 
     // update tracker ()

@@ -21,11 +21,8 @@ class AbiosApi {
       if( !empty($series->matches)) {
         foreach( $series->matches as $match ) {
 
-          // add more data to the matches
-          $match->series_title = $series->title;
-          $match->game = $series->game;
-          $match->start = $series->start;
-          $match->tournament_title = $series->tournament->title;
+          // add series data to the matches
+					$match->series = $series;
           $matches[] = $match;
 
         }
