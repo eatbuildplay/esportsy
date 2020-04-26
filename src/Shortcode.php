@@ -22,9 +22,13 @@ class Shortcode {
     $template = new Template();
     $template->path = $this->templatePath;
     $template->name = $this->templateName;
-    $template->data = $this->templateData;
+    $template->data = $this->loadData();
     return $template->get();
 
+  }
+
+  public function loadData() {
+    return [];
   }
 
 }

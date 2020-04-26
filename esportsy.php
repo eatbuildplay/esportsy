@@ -26,6 +26,7 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/Template.php' );
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
+    require_once( ESPORTSY_PATH . 'src/models/Match.php' );
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
     //new ShortcodeGamesList();
@@ -51,6 +52,32 @@ class plugin {
 
     // enqueue scripts
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
+
+    add_action( 'espy_cron_hook', [$this, 'cron']);
+    if ( ! wp_next_scheduled( 'espy_cron_hook' ) ) {
+      wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
+    }
+
+  }
+
+  public function cron() {
+
+    $this->importMatches();
+
+  }
+
+  public function importMatches() {
+
+    // get the series data and parse it into matches
+
+    // insert each match as a post
+    foreach( $matches as $matchData ) {
+      $match = new Match;
+      $match->seriesTitle = $matchData->series_title;
+      $match->save();
+    }
+
+    // update tracker ()
 
   }
 

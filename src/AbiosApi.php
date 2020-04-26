@@ -11,6 +11,31 @@ class AbiosApi {
 	 */
 	public function __construct() {}
 
+	public function fetchMatches() {
+
+    $seriesList = $this->fetchSeriesList();
+
+    $matches = [];
+    foreach( $seriesList as $series ) {
+
+      if( !empty($series->matches)) {
+        foreach( $series->matches as $match ) {
+
+          // add more data to the matches
+          $match->series_title = $series->title;
+          $match->game = $series->game;
+          $match->start = $series->start;
+          $match->tournament_title = $series->tournament->title;
+          $matches[] = $match;
+
+        }
+      }
+    }
+
+    return $matches;
+
+  }
+
   public function fetchGamesList() {
     $token = $this->fetchToken();
     $vars = [ 'access_token' => $token ];
@@ -42,7 +67,7 @@ class AbiosApi {
 				'matches',
 				'tournament'
 			),
-			'starts_after' => 'now',
+			//'starts_after' => 'now',
 			'page' => 2
     ];
     $response = $this->call( '/series', 'get', $vars );
@@ -51,6 +76,7 @@ class AbiosApi {
 			$dataObjects = $response->data->data;
       return $dataObjects;
     }
+
     return false;
 
   }

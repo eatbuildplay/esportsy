@@ -9,14 +9,15 @@ class ShortcodeCalendar extends Shortcode {
   public function __construct() {
 
     add_action( 'wp_ajax_espy_calendar_draw', array( $this, 'jxDraw'));
-
     $this->templateName = 'calendar';
-    $this->templateData = [
-      'calendarData' => $this->fetchCalendarData()
-    ];
-
     parent::__construct();
 
+  }
+
+  public function loadData() {
+    return [
+      'calendarData' => $this->fetchCalendarData()
+    ];
   }
 
   public function jxDraw() {
