@@ -24,7 +24,7 @@ print '</pre>';
       <ul class="filter-menu">
         <?php foreach( $calendarData->games as $game ): ?>
           <li>
-            <img src="<?php print $game->images->square; ?>" />
+            <img src="<?php print $game->imageSquare; ?>" />
           </li>
         <?php endforeach; ?>
       </ul>

@@ -35,4 +35,10 @@ class Match {
 
   }
 
+  public function fetch() {
+
+    
+
+  }
+
 }

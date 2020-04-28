@@ -52,10 +52,10 @@ class ShortcodeCalendar extends Shortcode {
   public function fetchCalendarData() {
 
     $calendarData = new \stdClass;
-    $api = new AbiosApi();
 
     // extract matches from series data
-    $seriesList = $api->fetchSeriesList();
+    // $seriesList = $api->fetchSeriesList();
+    /*
     if( empty( $seriesList )) {
       return false;
     }
@@ -78,7 +78,10 @@ class ShortcodeCalendar extends Shortcode {
     }
 
     $calendarData->matches = $matches;
-    $calendarData->games = $api->fetchGamesList(1);
+
+    */
+    
+    $calendarData->games = Game::fetchAll();
     return $calendarData;
   }
 
