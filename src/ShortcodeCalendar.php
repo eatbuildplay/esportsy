@@ -51,8 +51,10 @@ class ShortcodeCalendar extends Shortcode {
 
   public function fetchCalendarData() {
 
+    $gameId = 2;
+
     $calendarData = new \stdClass;
-    $calendarData->matches = Match::fetch();
+    $calendarData->matches = Match::fetch( $gameId );
     $calendarData->games = Game::fetchAll();
     return $calendarData;
 

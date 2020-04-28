@@ -24,29 +24,58 @@ class Match {
       'post_title'  => $this->matchId
     ];
     $postId = wp_insert_post( $params );
+    return $postId;
 
   }
 
   public function update() {
 
+
+
   }
 
   public function save() {
 
+    if( $this->id > 0 ) {
+      $this->update();
+    } else {
+      $this->id = $this->create();
+      if( !$this->id ) {
+        return false;
+      }
+    }
+
+    update_post_meta( $this->id, 'game_id', $this->gameId );
+    update_post_meta( $this->id, 'match_id', $this->matchId );
+
   }
 
-  public static function fetch() {
+  public static function fetch( $gameId = 0 ) {
 
-    $matchPosts = get_posts([
+    $query = [
       'post_type' => 'match',
-      'posts_per_page' => -1
-    ]);
+      'posts_per_page' => -1,
+    ];
+
+    if( $gameId ) {
+      $query['meta_query'] = [
+        [
+          'key'   => 'game_id',
+          'value' => $gameId
+        ]
+      ];
+    }
+
+    $matchPosts = get_posts( $query );
 
     $matches = [];
     foreach( $matchPosts as $matchPost ) {
       $match = new Match;
-      $fields = get_fields( $matchPost );
+      $fields = get_post_meta( $matchPost->ID );
       $match->id = $matchPost->ID;
+      $match->title = $matchPost->post_title;
+      $match->matchId = get_post_meta( $matchPost->ID, 'match_id', 1 );
+      $match->gameId = get_post_meta( $matchPost->ID, 'game_id', 1 );
       $matches[] = $match;
     }
 

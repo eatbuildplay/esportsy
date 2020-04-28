@@ -52,6 +52,19 @@ class plugin {
 
   public function init() {
 
+    $matches = Match::fetch();
+    $gameId = 2;
+    foreach( $matches as $match ) {
+      $match->gameId = $gameId;
+      $match->matchId = $match->title;
+      $match->save();
+      if( $gameId == 2 ) {
+        $gameId = 3;
+      } else {
+        $gameId = 2;
+      }
+    }
+
     // enqueue scripts
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
 
