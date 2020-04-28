@@ -26,6 +26,7 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/Template.php' );
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
+    require_once( ESPORTSY_PATH . 'src/models/Game.php' );
     require_once( ESPORTSY_PATH . 'src/models/Match.php' );
     require_once( ESPORTSY_PATH . 'src/sync/Sync.php' );
 

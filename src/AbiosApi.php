@@ -33,10 +33,21 @@ class AbiosApi {
 
   }
 
-  public function fetchGamesList() {
-    $token = $this->fetchToken();
-    $vars = [ 'access_token' => $token ];
+  public function fetchGamesList( $page = 1 ) {
+
+		$token = $this->fetchToken();
+		if( !$token ) {
+			return;
+		}
+
+    $vars = [
+			'access_token' 	=> $token,
+			'page'					=> $page
+		];
     $response = $this->call( '/games', 'get', $vars );
+
+		var_dump( $response );
+
     $games = $response->data->data;
     if( $response->code == 200 ) {
       return $games;

@@ -22,24 +22,7 @@ print '</pre>';
 
     <div class="header-right">
       <ul class="filter-menu">
-        <?php
-
-          $supportedGames = [
-            'Dota 2',
-            'LoL',
-            'CS:GO',
-            'SCII',
-            'OW',
-            'Hearthstone',
-            'FIFA'
-          ];
-          foreach( $calendarData->games as $game ):
-
-            if( !in_array($game->title, $supportedGames) ) {
-              continue;
-            }
-
-          ?>
+        <?php foreach( $calendarData->games as $game ): ?>
           <li>
             <img src="<?php print $game->images->square; ?>" />
           </li>

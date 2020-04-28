@@ -56,6 +56,9 @@ class ShortcodeCalendar extends Shortcode {
 
     // extract matches from series data
     $seriesList = $api->fetchSeriesList();
+    if( empty( $seriesList )) {
+      return false;
+    }
 
     $matches = [];
     foreach( $seriesList as $series ) {
@@ -75,7 +78,7 @@ class ShortcodeCalendar extends Shortcode {
     }
 
     $calendarData->matches = $matches;
-    $calendarData->games = $api->fetchGamesList();
+    $calendarData->games = $api->fetchGamesList(1);
     return $calendarData;
   }
 
