@@ -4,7 +4,7 @@ namespace Esportsy;
 
 class Match {
 
-  public $postId = 0;
+  public $id = 0;
   public $matchId = 0;
 
   public $seriesId = 0;
@@ -35,9 +35,22 @@ class Match {
 
   }
 
-  public function fetch() {
+  public static function fetch() {
 
-    
+    $matchPosts = get_posts([
+      'post_type' => 'match',
+      'posts_per_page' => -1
+    ]);
+
+    $matches = [];
+    foreach( $matchPosts as $matchPost ) {
+      $match = new Match;
+      $fields = get_fields( $matchPost );
+      $match->id = $matchPost->ID;
+      $matches[] = $match;
+    }
+
+    return $matches;
 
   }
 

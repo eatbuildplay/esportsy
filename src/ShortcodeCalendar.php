@@ -28,7 +28,7 @@ class ShortcodeCalendar extends Shortcode {
     $message = 'okay';
 
     $template = new Template;
-    $template->name = 'calendar-match';
+    $template->name = 'calendar-temp';
     $html = '';
 
     foreach( $calendarData->matches as $match ) {
@@ -52,37 +52,10 @@ class ShortcodeCalendar extends Shortcode {
   public function fetchCalendarData() {
 
     $calendarData = new \stdClass;
-
-    // extract matches from series data
-    // $seriesList = $api->fetchSeriesList();
-    /*
-    if( empty( $seriesList )) {
-      return false;
-    }
-
-    $matches = [];
-    foreach( $seriesList as $series ) {
-
-      if( !empty($series->matches)) {
-        foreach( $series->matches as $match ) {
-
-          // add more data to the matches
-          $match->series_title = $series->title;
-          $match->game = $series->game;
-          $match->start = $series->start;
-          $match->tournament_title = $series->tournament->title;
-          $matches[] = $match;
-
-        }
-      }
-    }
-
-    $calendarData->matches = $matches;
-
-    */
-    
+    $calendarData->matches = Match::fetch();
     $calendarData->games = Game::fetchAll();
     return $calendarData;
+
   }
 
 }
