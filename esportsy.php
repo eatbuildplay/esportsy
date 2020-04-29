@@ -95,13 +95,11 @@ class plugin {
       $importDate = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
       if( $syncLast->currentPage == $syncLast->lastPage ) {
         $importDate->modify('+1 day');
+        $page = 1;
+      } else {
+        $page = $syncLast->currentPage +1;
       }
     }
-
-
-
-
-
 
     $beginOfDay = clone $importDate;
     $beginOfDay->modify('today');
@@ -112,7 +110,7 @@ class plugin {
     $start = $beginOfDay->format( 'Y-m-d\TH:i:s\Z' );
     $end = $endOfDay->format( 'Y-m-d\TH:i:s\Z' );
 
-    $seriesResponse = $api->fetchSeriesByDateRange( $start, $end );
+    $seriesResponse = $api->fetchSeriesByDateRange( $start, $end, $page );
 
     if( $seriesResponse->code != 200 ) {
       return;
