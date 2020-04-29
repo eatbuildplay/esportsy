@@ -27,8 +27,11 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
     require_once( ESPORTSY_PATH . 'src/models/Game.php' );
+    require_once( ESPORTSY_PATH . 'src/models/Series.php' );
     require_once( ESPORTSY_PATH . 'src/models/Match.php' );
     require_once( ESPORTSY_PATH . 'src/sync/Sync.php' );
+    require_once( ESPORTSY_PATH . 'src/sync/SyncRoutine.php' );
+    require_once( ESPORTSY_PATH . 'src/sync/SyncInstance.php' );
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
     //new ShortcodeGamesList();
@@ -52,64 +55,94 @@ class plugin {
 
   public function init() {
 
-    $matches = Match::fetch();
-    $gameId = 2;
-    foreach( $matches as $match ) {
-      $match->gameId = $gameId;
-      $match->matchId = $match->title;
-      $match->save();
-      if( $gameId == 2 ) {
-        $gameId = 3;
-      } else {
-        $gameId = 2;
-      }
-    }
-
     // enqueue scripts
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
 
     add_action( 'espy_cron_hook', [$this, 'cron']);
-    if ( ! wp_next_scheduled( 'espy_cron_hook' ) ) {
+    if ( !wp_next_scheduled( 'espy_cron_hook' ) ) {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
+
+    // test test test
+    // $this->importSeries();
 
   }
 
   public function cron() {
 
-    $this->importMatches();
+    // $this->importSeries();
 
   }
 
-  public function importMatches() {
-
-    return;
+  public function importSeries() {
 
     // get the series data and parse it into matches
     $api = new AbiosApi();
-    $matches = $api->fetchMatches();
+
+    $syncLast = SyncInstance::fetchLast();
+
+    /*
+    print '<pre>';
+    var_dump( $syncLast );
+    print '</pre>';
+    die();
+    */
+
+
+    if( !$syncLast ) {
+      $importDate = new \DateTime();
+    } else {
+      $importDate = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
+      if( $syncLast->currentPage == $syncLast->lastPage ) {
+        $importDate->modify('+1 day');
+      }
+    }
+
+
+
+
+
+
+    $beginOfDay = clone $importDate;
+    $beginOfDay->modify('today');
+    $endOfDay = clone $beginOfDay;
+    $endOfDay->modify('tomorrow');
+    $endOfDateTimestamp = $endOfDay->getTimestamp();
+    $endOfDay->setTimestamp($endOfDateTimestamp - 1);
+    $start = $beginOfDay->format( 'Y-m-d\TH:i:s\Z' );
+    $end = $endOfDay->format( 'Y-m-d\TH:i:s\Z' );
+
+    $seriesResponse = $api->fetchSeriesByDateRange( $start, $end );
+
+    if( $seriesResponse->code != 200 ) {
+      return;
+    }
 
     // insert each match as a post
-    foreach( $matches as $matchData ) {
+    foreach( $seriesResponse->data as $seriesData ) {
 
-      $match = new Match();
-      $match->matchId = $matchData->id;
+      $series = new Series();
 
-      $match->gameId = $matchData->game->id;
-      $match->gameTitle = $matchData->game->title;
-      $match->gameLogo = $matchData->game->images->square;
+      $series->seriesId = $seriesData->id;
+      $series->title = $seriesData->title;
+      $series->gameId = $seriesData->game->id;
+      $series->gameTitle = $seriesData->game->title;
+      $series->gameLogo = $seriesData->game->images->square;
+      $series->tournamentId = $seriesData->tournament->id;
+      $series->tournamentTitle = $seriesData->tournament->title;
 
-      $match->tournamentId = $matchData->tournament->id;
-      $match->tournamentTitle = $matchData->tournament->title;
-
-      $match->seriesId = $matchData->series->id;
-      $match->seriesTitle = $matchData->series->title;
-
-      $match->create();
+      $series->save();
 
     }
 
-    // update tracker ()
+    // update tracker
+    $sync = new SyncInstance();
+    $sync->routine = "series_import";
+    $sync->timestamp = time();
+    $sync->dateImport = $beginOfDay->format('Y-m-d');
+    $sync->lastPage = $seriesResponse->last_page;
+    $sync->currentPage = $seriesResponse->current_page;
+    $sync->save();
 
   }
 

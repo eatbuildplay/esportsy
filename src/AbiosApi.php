@@ -5,33 +5,12 @@ namespace Esportsy;
 class AbiosApi {
 
 	public $baseUrl = 'https://api.abiosgaming.com/v2';
+	public $token = '0a89946531255dec79cb5c26b0c2c2bc48862fc9008503bd202536fb6d02e7c4';
 
 	/*
 	 * Constructor sets the api key saved in settings
 	 */
 	public function __construct() {}
-
-	public function fetchMatches() {
-
-    $seriesList = $this->fetchSeriesList();
-
-    $matches = [];
-    foreach( $seriesList as $series ) {
-
-      if( !empty($series->matches)) {
-        foreach( $series->matches as $match ) {
-
-          // add series data to the matches
-					$match->series = $series;
-          $matches[] = $match;
-
-        }
-      }
-    }
-
-    return $matches;
-
-  }
 
   public function fetchGamesList( $page = 1 ) {
 
@@ -45,8 +24,6 @@ class AbiosApi {
 			'page'					=> $page
 		];
     $response = $this->call( '/games', 'get', $vars );
-
-		var_dump( $response );
 
     $games = $response->data->data;
     if( $response->code == 200 ) {
@@ -66,26 +43,26 @@ class AbiosApi {
     return false;
   }
 
-  public function fetchSeriesList() {
+  public function fetchSeriesByDateRange( $start, $end, $page = 1 ) {
+
+		$gameIds = [1,2,3];
 
     $token = $this->fetchToken();
+
     $vars = [
       'access_token' => $token,
       'with' => array(
 				'matches',
-				'tournament'
+				'tournament',
+				'sportsbook_odds'
 			),
-			//'starts_after' => 'now',
-			'page' => 2
+			'games' => $gameIds,
+			'starts_after' => $start,
+			'starts_before' => $end,
+			'page' => $page
     ];
     $response = $this->call( '/series', 'get', $vars );
-
-    if( $response->code == 200 ) {
-			$dataObjects = $response->data->data;
-      return $dataObjects;
-    }
-
-    return false;
+    return $response;
 
   }
 
@@ -152,8 +129,15 @@ class AbiosApi {
 
 		$response = new \stdClass;
 		$response->raw = curl_exec( $curl );
-		$response->data = json_decode( $response->raw );
 		$response->code = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
+
+		if( $response->code == 200 ) {
+			$data = json_decode( $response->raw );
+			$response->last_page = $data->last_page;
+			$response->current_page = $data->current_page;
+			$response->data = $data->data;
+		}
+
 
 		/*
      * Do logging here!
@@ -164,6 +148,8 @@ class AbiosApi {
  	}
 
   public function fetchToken() {
+
+		// return $this->token;
 
     $vars = [
       'grant_type' => 'client_credentials',
