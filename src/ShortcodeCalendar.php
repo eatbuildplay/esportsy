@@ -28,12 +28,12 @@ class ShortcodeCalendar extends Shortcode {
     $message = 'okay';
 
     $template = new Template;
-    $template->name = 'calendar-temp';
+    $template->name = 'calendar-series';
     $html = '';
 
-    foreach( $calendarData->matches as $match ) {
+    foreach( $calendarData->series as $series ) {
       $template->data = [
-        'match' => $match
+        'series' => $series
       ];
       $html .= $template->get();
     }
@@ -54,7 +54,7 @@ class ShortcodeCalendar extends Shortcode {
     $gameId = 2;
 
     $calendarData = new \stdClass;
-    $calendarData->matches = Match::fetch( $gameId );
+    $calendarData->series = Series::fetch( $gameId );
     $calendarData->games = Game::fetchAll();
     return $calendarData;
 

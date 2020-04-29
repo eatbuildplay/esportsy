@@ -42,7 +42,7 @@ class Series {
         return false;
       }
     }
-    
+
     update_post_meta( $this->id, 'series_id', $this->seriesId );
     update_post_meta( $this->id, 'title', $this->seriesId );
     update_post_meta( $this->id, 'tournament_id', $this->tournamentId );
@@ -57,7 +57,7 @@ class Series {
 
     $query = [
       'post_type' => 'Series',
-      'posts_per_page' => -1,
+      'posts_per_page' => 10,
     ];
 
     if( $gameId ) {
@@ -75,7 +75,7 @@ class Series {
 
     $seriesPosts = get_posts( $query );
 
-    $series = [];
+    $seriesList = [];
     foreach( $seriesPosts as $seriesPost ) {
       $series = new Series;
       $fields = get_post_meta( $seriesPost->ID );
@@ -83,10 +83,15 @@ class Series {
       $series->title = $seriesPost->post_title;
       $series->seriesId = get_post_meta( $seriesPost->ID, 'series_id', 1 );
       $series->gameId = get_post_meta( $seriesPost->ID, 'game_id', 1 );
-      $series[] = $series;
+      $series->tournamentTitle = get_post_meta( $seriesPost->ID, 'tournament_title', 1 );
+      $series->gameLogo = get_post_meta( $seriesPost->ID, 'game_logo', 1 );
+      $series->gameTitle = get_post_meta( $seriesPost->ID, 'game_title', 1 );
+
+
+      $seriesList[] = $series;
     }
 
-    return $series;
+    return $seriesList;
 
   }
 
