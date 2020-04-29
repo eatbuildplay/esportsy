@@ -42,9 +42,14 @@ class Series {
         return false;
       }
     }
-
-    update_post_meta( $this->id, 'game_id', $this->gameId );
+    
     update_post_meta( $this->id, 'series_id', $this->seriesId );
+    update_post_meta( $this->id, 'title', $this->seriesId );
+    update_post_meta( $this->id, 'tournament_id', $this->tournamentId );
+    update_post_meta( $this->id, 'tournament_title', $this->tournamentTitle );
+    update_post_meta( $this->id, 'game_id', $this->gameId );
+    update_post_meta( $this->id, 'game_title', $this->gameTitle );
+    update_post_meta( $this->id, 'game_logo', $this->gameLogo );
 
   }
 

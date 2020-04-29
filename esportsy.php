@@ -70,7 +70,7 @@ class plugin {
 
   public function cron() {
 
-    // $this->importSeries();
+    $this->importSeries();
 
   }
 
