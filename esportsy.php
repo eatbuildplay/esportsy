@@ -87,14 +87,13 @@ class plugin {
     die();
     */
 
-
+    $page = 1;
     if( !$syncLast ) {
       $importDate = new \DateTime();
     } else {
       $importDate = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
       if( $syncLast->currentPage == $syncLast->lastPage ) {
         $importDate->modify('+1 day');
-        $page = 1;
       } else {
         $page = $syncLast->currentPage +1;
       }

@@ -11,12 +11,13 @@
   </div>
 
   <div class="calendar-series-col col-2">
-    <?php print $series->start; ?>
+    <h5><?php print $series->gameTitle; ?> | <?php print $series->tournamentTitle; ?></h5>
+    <h1><?php print $series->title; ?></h1>
+
   </div>
 
   <div class="calendar-series-col col-3">
-    <h5><?php print $series->gameTitle; ?> | <?php print $series->tournamentTitle; ?></h5>
-    <h1><?php print $series->title; ?></h1>
+    <?php print $series->start; ?>
   </div>
 
 </article>

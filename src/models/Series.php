@@ -89,8 +89,6 @@ class Series {
       $series->tournamentTitle = get_post_meta( $seriesPost->ID, 'tournament_title', 1 );
       $series->gameLogo = get_post_meta( $seriesPost->ID, 'game_logo', 1 );
       $series->gameTitle = get_post_meta( $seriesPost->ID, 'game_title', 1 );
-
-
       $seriesList[] = $series;
     }
 
