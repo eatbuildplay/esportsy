@@ -55,18 +55,19 @@ class Series {
 
   }
 
-  public static function fetch( $gameId = 0, $past = false ) {
+  public static function fetch( $games = [], $past = false ) {
 
     $query = [
       'post_type' => 'Series',
       'posts_per_page' => 10,
     ];
 
-    if( $gameId ) {
+    if( is_array( $games )) {
       $query['meta_query'] = [
         [
-          'key'   => 'game_id',
-          'value' => $gameId
+          'key'     => 'game_id',
+          'value'   => $games,
+          'compare' => 'IN'
         ]
       ];
     }

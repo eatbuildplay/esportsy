@@ -17,13 +17,16 @@ class ShortcodeCalendar extends Shortcode {
 
   public function loadData() {
     return [
-      'calendarData' => $this->fetchCalendarData()
+      'games' => Game::fetchAll()
     ];
   }
 
   public function jxDraw() {
 
-    $calendarData = $this->fetchCalendarData();
+    $params = $_POST['params'];
+    $games = $params['filters']['games'];
+
+    $seriesList = $this->fetchSeriesList( $games );
 
     $code = 200;
     $message = 'okay';
@@ -32,7 +35,7 @@ class ShortcodeCalendar extends Shortcode {
     $template->name = 'calendar-series';
     $html = '';
 
-    foreach( $calendarData->series as $series ) {
+    foreach( $seriesList as $series ) {
       $template->data = [
         'series' => $series
       ];
@@ -50,14 +53,10 @@ class ShortcodeCalendar extends Shortcode {
 
   }
 
-  public function fetchCalendarData() {
+  public function fetchSeriesList( $games ) {
 
-    $gameId = 2;
-
-    $calendarData = new \stdClass;
-    $calendarData->series = Series::fetch( $gameId );
-    $calendarData->games = Game::fetchAll();
-    return $calendarData;
+    $series = Series::fetch( $games );
+    return $series;
 
   }
 

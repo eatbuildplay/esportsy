@@ -1,14 +1,3 @@
-<?php
-
-/*
-print '<pre>';
-var_dump( $calendarData->matches[0]->rosters );
-print '</pre>';
-*/
-
-?>
-
-
 <div class="espy-calendar">
 
   <header>
@@ -22,7 +11,7 @@ print '</pre>';
 
     <div class="header-right">
       <ul class="filter-menu">
-        <?php foreach( $calendarData->games as $game ): ?>
+        <?php foreach( $games as $game ): ?>
           <li class="selected" data-game-id="<?php print $game->abiosId; ?>">
             <img src="<?php print $game->imageSquare; ?>" />
           </li>
