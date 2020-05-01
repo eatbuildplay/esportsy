@@ -63,8 +63,7 @@ class plugin {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
 
-    // test test test
-    // $this->importSeries();
+    $this->importSeries();
 
   }
 
@@ -123,6 +122,7 @@ class plugin {
 
       $series->seriesId = $seriesData->id;
       $series->title = $seriesData->title;
+      $series->start = $seriesData->start;
       $series->gameId = $seriesData->game->id;
       $series->gameTitle = $seriesData->game->title;
       $series->gameLogo = $seriesData->game->images->square;

@@ -2,6 +2,19 @@
 
 }
 
+.calendar-series {
+  font-family: "Lato", sans-serif;
+  border: solid 1px #F7F7F7;
+  background: #FAFAFC;
+}
+.calendar-series-col {
+  display: inline-block;
+
+}
+.calendar-series img {
+  max-width: 60px;
+}
+
 header {
   background: #454850;
   padding: 20px 40px 20px 40px;
