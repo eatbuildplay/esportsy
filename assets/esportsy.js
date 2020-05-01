@@ -8,8 +8,7 @@
 
       $('.filter-menu li').on('click', function() {
 
-        console.log('filtering...')
-
+        // test if in show all mode with no filtering
         var showAll = false;
         var $gamesSelected = $('.filter-menu li.selected');
         var $gamesAll = $('.filter-menu li');
@@ -32,9 +31,6 @@
 
         // if none selected after this choice, select all
         var $gamesSelected = $('.filter-menu li.selected');
-
-        console.log( $gamesSelected )
-
         if( !$gamesSelected.length ) {
           $('.filter-menu li').addClass('selected')
         }
@@ -61,10 +57,18 @@
 
     draw: function() {
 
-      var gameFilter = false;
+      var gameFilter = [];
+      var $gamesSelected = $('.filter-menu li.selected');
+      $gamesSelected.each( function( index ) {
+        gameFilter.push( $(this).data('game-id') )
+      });
+
+
 
       var params = {
-        filters: {}
+        filters: {
+          games: gameFilter
+        }
       }
 
       data = {
