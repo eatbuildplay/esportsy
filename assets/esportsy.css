@@ -45,18 +45,20 @@
   color: #C9C9C9;
 }
 
-header {
-  background: #454850;
-  padding: 20px 40px 20px 40px;
-  height: 70px;
+.espy-calendar header {
+  background: #FFFFFF;
+  padding: 120px 40px 12px 40px;
+  height: 50px;
 }
-.header-left {
-  width: 20%;
+.espy-calendar .header-left {
+  width: 25%;
   min-width: 120px;
   float: left;
+  padding: 25px 0 0 15px;
+  box-sizing: border-box;
 }
-.header-right {
-  width: 80%;
+.espy-calendar .header-right {
+  width: 75%;
   min-width: 200px;
   float: left;
   text-align: right;
@@ -69,12 +71,17 @@ ul.top-menu {
 }
 
 ul.top-menu li {
+  font-family: "Lato", sans-serif;
   display: inline-block;
   margin: 0 40px 0 0;
   text-transform: uppercase;
-  font-size: 14px;
-  font-family: verdana, sans-serif;
+  font-size: 16px;
+  color: #363636;
   cursor: pointer;
+}
+ul.top-menu li.selected {
+  padding-bottom: 4px;
+  border-bottom: solid 4px #2AACDE;
 }
 
 .filter-menu {

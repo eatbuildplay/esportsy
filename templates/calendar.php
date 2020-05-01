@@ -4,8 +4,8 @@
 
     <div class="header-left">
       <ul class="top-menu">
-        <li>Upcoming</li>
-        <li>Results</li>
+        <li class="selected" data-schedule="upcoming">Upcoming</li>
+        <li data-schedule="results">Results</li>
       </ul>
     </div>
 
