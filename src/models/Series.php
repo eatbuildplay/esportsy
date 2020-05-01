@@ -52,6 +52,8 @@ class Series {
     update_post_meta( $this->id, 'game_id', $this->gameId );
     update_post_meta( $this->id, 'game_title', $this->gameTitle );
     update_post_meta( $this->id, 'game_logo', $this->gameLogo );
+    update_post_meta( $this->id, 'team_a', $this->teamA );
+    update_post_meta( $this->id, 'team_b', $this->teamB );
 
   }
 
@@ -99,6 +101,8 @@ class Series {
       $series->tournamentTitle = get_post_meta( $seriesPost->ID, 'tournament_title', 1 );
       $series->gameLogo = get_post_meta( $seriesPost->ID, 'game_logo', 1 );
       $series->gameTitle = get_post_meta( $seriesPost->ID, 'game_title', 1 );
+      $series->teamA = get_post_meta( $seriesPost->ID, 'team_a', 1 );
+      $series->teamB = get_post_meta( $seriesPost->ID, 'team_b', 1 );
       $seriesList[] = $series;
     }
 
