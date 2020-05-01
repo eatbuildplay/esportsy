@@ -94,6 +94,10 @@ ul.top-menu li {
 
 .filter-menu li img {
   width: 50px;
+  opacity: 0.5;
+}
+.filter-menu li.selected img {
+  opacity: 1.0;
 }
 
 

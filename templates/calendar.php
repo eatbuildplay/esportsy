@@ -23,7 +23,7 @@ print '</pre>';
     <div class="header-right">
       <ul class="filter-menu">
         <?php foreach( $calendarData->games as $game ): ?>
-          <li>
+          <li class="selected" data-game-id="<?php print $game->id; ?>">
             <img src="<?php print $game->imageSquare; ?>" />
           </li>
         <?php endforeach; ?>
@@ -35,63 +35,3 @@ print '</pre>';
   <section id="calendar-canvas"></section>
 
 </div>
-
-
-<script>
-
-(function($) {
-
-  var calendar = {
-
-    canvas: $('#calendar-canvas'),
-
-    init: function() {
-
-      $('.filter-menu li').on('click', function() {
-
-        console.log('filtering...')
-
-        calendar.draw();
-
-      })
-
-      $('.top-menu li').on('click', function() {
-
-        console.log('switch...')
-
-        calendar.draw();
-
-      })
-
-    },
-
-    draw: function() {
-
-      var params = {
-
-      }
-
-      data = {
-        action: 'espy_calendar_draw',
-        params: params
-      }
-      $.post( espy.ajaxurl, data, function( response ) {
-
-        response = JSON.parse(response);
-        console.log( response )
-
-        calendar.canvas.html( response.html );
-
-      });
-
-    }
-
-  }
-
-  calendar.init()
-
-})( jQuery );
-
-
-
-</script>
