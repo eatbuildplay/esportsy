@@ -39,9 +39,15 @@
 
       })
 
+      /*
+       * Schedule filter click handler
+       */
       $('.top-menu li').on('click', function() {
 
-        console.log('switch...')
+        // set selected
+        var $menuBtn = $(this);
+        $('.top-menu li').removeClass('selected')
+        $menuBtn.addClass('selected')
 
         calendar.draw();
 
@@ -57,17 +63,20 @@
 
     draw: function() {
 
+      // setup games filter
       var gameFilter = [];
       var $gamesSelected = $('.filter-menu li.selected');
       $gamesSelected.each( function( index ) {
         gameFilter.push( $(this).data('game-id') )
       });
 
-
+      // setup schedule filter
+      var scheduleFilter = $('.top-menu li.selected').data('schedule');
 
       var params = {
         filters: {
-          games: gameFilter
+          games: gameFilter,
+          schedule: scheduleFilter
         }
       }
 

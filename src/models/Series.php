@@ -55,25 +55,34 @@ class Series {
 
   }
 
-  public static function fetch( $games = [], $past = false ) {
+  public static function fetch( $games = [], $schedule = 'upcoming' ) {
 
     $query = [
       'post_type' => 'Series',
       'posts_per_page' => 10,
+      'meta_query' => []
     ];
 
     if( is_array( $games )) {
-      $query['meta_query'] = [
-        [
-          'key'     => 'game_id',
-          'value'   => $games,
-          'compare' => 'IN'
-        ]
+      $query['meta_query'][] = [
+        'key'     => 'game_id',
+        'value'   => $games,
+        'compare' => 'IN'
       ];
     }
 
-    if( $past ) {
-      // add meta query for past current timestamp
+    if( $schedule == 'upcoming' ) {
+      $query['meta_query'][] = [
+        'key'     => 'start',
+        'value'   => date('Y-m-d h:i:s'),
+        'compare' => '>='
+      ];
+    } elseif( $schedule == 'results' ) {
+      $query['meta_query'][] = [
+        'key'     => 'start',
+        'value'   => date('Y-m-d h:i:s'),
+        'compare' => '<='
+      ];
     }
 
     $seriesPosts = get_posts( $query );

@@ -25,8 +25,9 @@ class ShortcodeCalendar extends Shortcode {
 
     $params = $_POST['params'];
     $games = $params['filters']['games'];
+    $schedule = $params['filters']['schedule'];
 
-    $seriesList = $this->fetchSeriesList( $games );
+    $seriesList = $this->fetchSeriesList( $games, $schedule );
 
     $code = 200;
     $message = 'okay';
@@ -53,9 +54,9 @@ class ShortcodeCalendar extends Shortcode {
 
   }
 
-  public function fetchSeriesList( $games ) {
+  public function fetchSeriesList( $games, $schedule ) {
 
-    $series = Series::fetch( $games );
+    $series = Series::fetch( $games, $schedule );
     return $series;
 
   }
