@@ -63,7 +63,7 @@ class plugin {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
 
-    $this->importSeries();
+    //$this->importSeries();
 
   }
 
@@ -164,7 +164,8 @@ class plugin {
 
     // localize ajax url
     $localizedData = [
-      'ajaxurl' => admin_url( 'admin-ajax.php' )
+      'ajaxurl' => admin_url( 'admin-ajax.php' ),
+      'seriesBaseUrl' => site_url('series')
     ];
     wp_localize_script( 'esportsy-main-js', 'espy', $localizedData );
 

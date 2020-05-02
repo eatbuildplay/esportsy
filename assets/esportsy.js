@@ -6,6 +6,12 @@
 
     init: function() {
 
+      $(document).on('click', '.calendar-series', function() {
+
+        window.location.href = espy.seriesBaseUrl + '/';
+
+      });
+
       $('.filter-menu li').on('click', function() {
 
         // test if in show all mode with no filtering
