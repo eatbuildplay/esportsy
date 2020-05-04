@@ -63,7 +63,7 @@ class plugin {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
 
-    //$this->importSeries();
+    $this->importSeries();
 
   }
 
@@ -91,12 +91,22 @@ class plugin {
     if( !$syncLast ) {
       $importDate = new \DateTime();
     } else {
+
+      // check if we already have gone 14-days ahead
+      $today = new \DateTime();
       $importDate = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
+      $daysDiff = $today->diff($importDate)->days; // 1
+      if( $daysDiff >= 14 ) {
+        return;
+      }
+
+      // advance to next day if all pages imported
       if( $syncLast->currentPage == $syncLast->lastPage ) {
         $importDate->modify('+1 day');
       } else {
         $page = $syncLast->currentPage +1;
       }
+
     }
 
     $beginOfDay = clone $importDate;
@@ -122,11 +132,26 @@ class plugin {
       $series->seriesId = $seriesData->id;
       $series->title = $seriesData->title;
       $series->start = $seriesData->start;
+      if( !is_null($seriesData->end)) {
+        $series->isOver = true;
+      }
       $series->gameId = $seriesData->game->id;
       $series->gameTitle = $seriesData->game->title;
       $series->gameLogo = $seriesData->game->images->square;
       $series->tournamentId = $seriesData->tournament->id;
       $series->tournamentTitle = $seriesData->tournament->title;
+
+      if( isset( $seriesData->rosters[0]->teams[0]->name )) {
+        $series->teamA = $seriesData->rosters[0]->teams[0]->name;
+      } else {
+        $series->teamA = "N/A";
+      }
+
+      if( isset( $seriesData->rosters[1]->teams[0]->name )) {
+        $series->teamB = $seriesData->rosters[1]->teams[0]->name;
+      } else {
+        $series->teamB = "N/A";
+      }
 
       $series->save();
 

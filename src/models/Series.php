@@ -8,11 +8,14 @@ class Series {
   public $seriesId = 0;
   public $title;
   public $start;
+  public $isOver;
   public $tournamentId = 0;
   public $tournamentTitle;
   public $gameId = 0;
   public $gameTitle;
   public $gameLogo;
+  public $teamA;
+  public $teamB;
 
   public function create() {
 
@@ -24,12 +27,6 @@ class Series {
     $postId = wp_insert_post( $params );
     $this->id = $postId;
     return $postId;
-
-  }
-
-  public function update() {
-
-
 
   }
 
@@ -47,6 +44,7 @@ class Series {
     update_post_meta( $this->id, 'series_id', $this->seriesId );
     update_post_meta( $this->id, 'title', $this->seriesId );
     update_post_meta( $this->id, 'start', $this->start );
+    update_post_meta( $this->id, 'is_over', $this->isOver );
     update_post_meta( $this->id, 'tournament_id', $this->tournamentId );
     update_post_meta( $this->id, 'tournament_title', $this->tournamentTitle );
     update_post_meta( $this->id, 'game_id', $this->gameId );
@@ -96,6 +94,7 @@ class Series {
       $series->id = $seriesPost->ID;
       $series->title = $seriesPost->post_title;
       $series->start = get_post_meta( $seriesPost->ID, 'start', 1 );
+      $series->isOver = get_post_meta( $seriesPost->ID, 'is_over', 1 );
       $series->seriesId = get_post_meta( $seriesPost->ID, 'series_id', 1 );
       $series->gameId = get_post_meta( $seriesPost->ID, 'game_id', 1 );
       $series->tournamentTitle = get_post_meta( $seriesPost->ID, 'tournament_title', 1 );
