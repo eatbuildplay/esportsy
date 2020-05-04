@@ -4,7 +4,7 @@
 
 ?>
 
-<article class="calendar-series">
+<article class="calendar-series" data-permalink="<?php print get_permalink( $series->id ); ?>">
 
   <div class="calendar-series-col col-1">
     <img src="<?php print $series->gameLogo; ?>" />

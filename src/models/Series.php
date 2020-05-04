@@ -59,7 +59,7 @@ class Series {
 
     $query = [
       'post_type' => 'Series',
-      'posts_per_page' => 10,
+      'posts_per_page' => 100,
       'meta_query' => []
     ];
 
@@ -67,22 +67,32 @@ class Series {
       $query['meta_query'][] = [
         'key'     => 'game_id',
         'value'   => $games,
-        'compare' => 'IN'
+        'compare' => 'IN',
       ];
     }
 
     if( $schedule == 'upcoming' ) {
+
       $query['meta_query'][] = [
         'key'     => 'start',
         'value'   => date('Y-m-d h:i:s'),
         'compare' => '>='
       ];
+      $query['order'] = 'ASC';
+      $query['orderby'] = 'meta_value';
+      $query['meta_key'] = 'start';
+
     } elseif( $schedule == 'results' ) {
+
       $query['meta_query'][] = [
         'key'     => 'start',
         'value'   => date('Y-m-d h:i:s'),
         'compare' => '<='
       ];
+      $query['order'] = 'DESC';
+      $query['orderby'] = 'meta_value';
+      $query['meta_key'] = 'start';
+
     }
 
     $seriesPosts = get_posts( $query );

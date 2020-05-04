@@ -63,13 +63,13 @@ class plugin {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
 
-    $this->importSeries();
+    // $this->importSeries();
 
   }
 
   public function cron() {
 
-    //$this->importSeries();
+    $this->importSeries();
 
   }
 
@@ -79,13 +79,6 @@ class plugin {
     $api = new AbiosApi();
 
     $syncLast = SyncInstance::fetchLast();
-
-    /*
-    print '<pre>';
-    var_dump( $syncLast );
-    print '</pre>';
-    die();
-    */
 
     $page = 1;
     if( !$syncLast ) {

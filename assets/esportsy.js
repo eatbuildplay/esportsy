@@ -8,7 +8,7 @@
 
       $(document).on('click', '.calendar-series', function() {
 
-        window.location.href = espy.seriesBaseUrl + '/';
+        window.location.href = $(this).data('permalink');
 
       });
 
