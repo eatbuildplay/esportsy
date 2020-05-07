@@ -4,7 +4,7 @@ global $post;
 $series = \Esportsy\Series::loadFromPost( $post );
 
 $api = new \Esportsy\AbiosApi();
-return $api->fetchSeries( $series->seriesId );
+$seriesResponse = $api->fetchSeries( $series->seriesId );
 
 ?>
 

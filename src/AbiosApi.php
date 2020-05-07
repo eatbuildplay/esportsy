@@ -83,20 +83,13 @@ class AbiosApi {
 
 		$token = $this->fetchToken();
 
-		var_dump( $token );
-
     $vars = [
       'access_token' => $token
     ];
     $response = $this->call( '/series/' . $seriesId, 'get', $vars );
 
-		print '<pre>';
-		var_dump($response);
-		print '</pre>';
-
     if( $response->code == 200 ) {
-			$dataObjects = $response->data->data;
-      return $dataObjects;
+			return $response->data;
     }
     return false;
 
@@ -154,10 +147,22 @@ class AbiosApi {
 		$response->code = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
 
 		if( $response->code == 200 ) {
+
 			$data = json_decode( $response->raw );
-			$response->last_page = $data->last_page;
-			$response->current_page = $data->current_page;
-			$response->data = $data->data;
+			if( isset( $data->id )) {
+
+				// singular response
+				$response->data = $data;
+
+			} else {
+
+				// list of objects
+				$response->last_page = $data->last_page;
+				$response->current_page = $data->current_page;
+				$response->data = $data->data;
+
+			}
+
 		}
 
 
@@ -193,8 +198,6 @@ class AbiosApi {
     $response->raw = curl_exec( $curl );
     $response->data = json_decode( $response->raw );
     $response->code = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
-
-		var_dump( $response );
 
     if( $response->code == 200 ) {
       return $response->data->access_token;
