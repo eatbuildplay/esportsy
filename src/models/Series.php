@@ -99,24 +99,28 @@ class Series {
 
     $seriesList = [];
     foreach( $seriesPosts as $seriesPost ) {
-      $series = new Series;
-      $fields = get_post_meta( $seriesPost->ID );
-      $series->id = $seriesPost->ID;
-      $series->title = $seriesPost->post_title;
-      $series->start = get_post_meta( $seriesPost->ID, 'start', 1 );
-      $series->isOver = get_post_meta( $seriesPost->ID, 'is_over', 1 );
-      $series->seriesId = get_post_meta( $seriesPost->ID, 'series_id', 1 );
-      $series->gameId = get_post_meta( $seriesPost->ID, 'game_id', 1 );
-      $series->tournamentTitle = get_post_meta( $seriesPost->ID, 'tournament_title', 1 );
-      $series->gameLogo = get_post_meta( $seriesPost->ID, 'game_logo', 1 );
-      $series->gameTitle = get_post_meta( $seriesPost->ID, 'game_title', 1 );
-      $series->teamA = get_post_meta( $seriesPost->ID, 'team_a', 1 );
-      $series->teamB = get_post_meta( $seriesPost->ID, 'team_b', 1 );
-      $seriesList[] = $series;
+      $seriesList[] = self::loadFromPost( $seriesPost );
     }
 
     return $seriesList;
 
+  }
+
+  public static function loadFromPost( $seriesPost ) {
+    $series = new Series;
+    $fields = get_post_meta( $seriesPost->ID );
+    $series->id = $seriesPost->ID;
+    $series->title = $seriesPost->post_title;
+    $series->start = get_post_meta( $seriesPost->ID, 'start', 1 );
+    $series->isOver = get_post_meta( $seriesPost->ID, 'is_over', 1 );
+    $series->seriesId = get_post_meta( $seriesPost->ID, 'series_id', 1 );
+    $series->gameId = get_post_meta( $seriesPost->ID, 'game_id', 1 );
+    $series->tournamentTitle = get_post_meta( $seriesPost->ID, 'tournament_title', 1 );
+    $series->gameLogo = get_post_meta( $seriesPost->ID, 'game_logo', 1 );
+    $series->gameTitle = get_post_meta( $seriesPost->ID, 'game_title', 1 );
+    $series->teamA = get_post_meta( $seriesPost->ID, 'team_a', 1 );
+    $series->teamB = get_post_meta( $seriesPost->ID, 'team_b', 1 );
+    return $series;
   }
 
 }

@@ -33,6 +33,9 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/sync/SyncRoutine.php' );
     require_once( ESPORTSY_PATH . 'src/sync/SyncInstance.php' );
 
+    require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesSingle.php' );
+    new ShortcodeSeriesSingle();
+
     require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
     //new ShortcodeGamesList();
 

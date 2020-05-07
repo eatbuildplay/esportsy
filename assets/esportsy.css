@@ -111,3 +111,12 @@ ul.top-menu li.selected {
 section {
   padding: 30px;
 }
+
+
+
+/*
+ * Series single
+ */
+ .series-single {
+   text-align: center;
+ }

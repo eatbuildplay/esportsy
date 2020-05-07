@@ -79,6 +79,28 @@ class AbiosApi {
     return false;
   }
 
+	public function fetchSeries( $seriesId ) {
+
+		$token = $this->fetchToken();
+
+		var_dump( $token );
+
+    $vars = [
+      'access_token' => $token
+    ];
+    $response = $this->call( '/series/' . $seriesId, 'get', $vars );
+
+		print '<pre>';
+		var_dump($response);
+		print '</pre>';
+
+    if( $response->code == 200 ) {
+			$dataObjects = $response->data->data;
+      return $dataObjects;
+    }
+    return false;
+
+	}
 
 	/*
 	 * Make call to the Abios API
@@ -171,6 +193,8 @@ class AbiosApi {
     $response->raw = curl_exec( $curl );
     $response->data = json_decode( $response->raw );
     $response->code = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
+
+		var_dump( $response );
 
     if( $response->code == 200 ) {
       return $response->data->access_token;
