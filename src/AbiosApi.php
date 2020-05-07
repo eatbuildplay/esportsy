@@ -84,7 +84,10 @@ class AbiosApi {
 		$token = $this->fetchToken();
 
     $vars = [
-      'access_token' => $token
+      'access_token' => $token,
+			'with' => [
+				'sportsbook_odds', 'matches', 'tournament', 'casters'
+			]
     ];
     $response = $this->call( '/series/' . $seriesId, 'get', $vars );
 
