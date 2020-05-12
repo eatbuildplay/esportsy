@@ -30,10 +30,22 @@ class Series {
 
   }
 
+  public function update() {
+
+    $params = [
+      'ID' => $this->id,
+      'post_title'  => $this->title
+    ];
+    $postId = wp_update_post( $params );
+    $this->id = $postId;
+    return $postId;
+
+  }
+
   public function save() {
 
-    if( $this->id > 0 ) {
-      $this->update();
+    if( $this->id > 0 || $this->exists() ) {
+      $this->id = $this->update();
     } else {
       $this->id = $this->create();
       if( !$this->id ) {
@@ -53,6 +65,21 @@ class Series {
     update_post_meta( $this->id, 'team_a', $this->teamA );
     update_post_meta( $this->id, 'team_b', $this->teamB );
 
+  }
+
+  public function exists() {
+    $posts = get_posts([
+      'post_type' => 'series',
+      'meta_query' => [
+        'key'   => 'series_id',
+        'value' => $this->seriesId
+      ]
+    ]);
+    if( !empty( $posts )) {
+      $this->id = $posts[0]->ID;
+      return true;
+    }
+    return false;
   }
 
   public static function fetch( $games = [], $schedule = 'upcoming' ) {
