@@ -123,4 +123,13 @@ class Series {
     return $series;
   }
 
+  /*
+   * Render methods
+   */
+  public function renderGameLogo() {
+    if( isset( $this->gameLogo )) {
+      print '<img class="game-logo" src="' . $this->gameLogo . '" />';
+    }
+  }
+
 }

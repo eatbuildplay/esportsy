@@ -10,19 +10,29 @@ $series->extra = $api->fetchSeries( $series->seriesId );
 
 <div class="series-single">
 
-  <img src="<?php print $series->gameLogo; ?>" />
+  <!-- series header -->
+  <header>
+    <div class="col-first">
+      <?php $series->renderGameLogo(); ?>
+    </div>
+    <div>
+      <h1 class="tournament-title">
+        <?php print $series->tournamentTitle; ?>
+      </h1>
+    </div>
+    <div class="col-third">
+      <?php print $series->title; ?> / Best of <?php print $series->extra->bestOf; ?> / <?php print $series->start; ?>
+    </div>
+  </header>
 
-  <h1 class="tournament-title">
-    <?php print $series->tournamentTitle; ?>
-  </h1>
+  <!-- series matchup and result -->
+  <div class="series-matchup">
 
-  <h3><?php print $series->title; ?> / Best of <?php print $series->extra->bestOf; ?> / <?php print $series->start; ?></h3>
-
-  <div class="matchup">
-    <div class="team-a">
-      <?php print $series->teamA; ?>
+    <div class="matchup-team team-a">
+      <h3><?php print $series->teamA; ?></h3>
       <img src="<?php print $series->extra->rosters[0]->teams[0]->images->default; ?>" />
     </div>
+
     <div class="matchup-score">
       <?php if( $series->extra->scores ) {
           $scores = (array) $series->extra->scores;
@@ -31,39 +41,46 @@ $series->extra = $api->fetchSeries( $series->seriesId );
         } else {
           print 'Scores not available yet.';
         }
-
       ?>
     </div>
-    <div class="team-b">
-      <?php print $series->teamB; ?>
+
+    <div class="matchup-team team-b">
+      <h3><?php print $series->teamB; ?></h3>
       <img src="<?php print $series->extra->rosters[1]->teams[0]->images->default; ?>" />
     </div>
   </div>
 
   <!-- Available Streams -->
-  <h2>Available Streams</h2>
-  <?php foreach( $series->extra->casters as $caster ): ?>
-    <a href="<?php print $caster->url; ?>">
-      <div>
-        <img src="<?php print $caster->country->images->default; ?>" />
-        <h2><?php print $caster->name; ?></h2>
-      </div>
-    </a>
-  <?php endforeach; ?>
+  <div class="series-streams">
+    <h2 class="series-stream-title">Available Streams</h2>
+    <?php foreach( $series->extra->casters as $caster ): ?>
+      <a href="<?php print $caster->url; ?>">
+        <div class="series-caster">
+          <img src="<?php print $caster->country->images->default; ?>" />
+          <h2><?php print $caster->name; ?></h2>
+        </div>
+      </a>
+    <?php endforeach; ?>
+  </div>
 
   <!-- Tournament Info -->
-  <h2>Tournament Info</h2>
-  <h5><?php print str_replace(' ', '', $series->extra->tournament->prizepool_string->total); ?></h5>
-  <h3><?php print $series->extra->tournament->title; ?></h3>
-  <img src="<?php print $series->extra->tournament->images->default; ?>" style="max-width: 200px;" />
-  <h4><?php print $series->extra->tournament->start; ?> - <?php print $series->extra->tournament->end; ?></h4>
-  <p><?php print $series->extra->tournament->description; ?></p>
+  <div class="series-tournament-info">
 
+    <div class="col-first">
+      <h2 class="series-tournament-info-title">Tournament Info</h2>
+    </div>
+
+    <div class="col-second">
+      <img src="<?php print $series->extra->tournament->images->default; ?>" />
+      <h3><?php print str_replace(' ', '', $series->extra->tournament->prizepool_string->total); ?></h3>
+    </div>
+
+    <div class="col-third">
+      <h1><?php print $series->extra->tournament->title; ?></h1>
+      <h4>From <?php print $series->extra->tournament->start; ?> to <?php print $series->extra->tournament->end; ?></h4>
+      <p><?php print $series->extra->tournament->description; ?></p>
+    </div>
+
+  </div>
 
 </div>
-
-<pre>
-<?php
-var_dump( $series->extra->rosters[1]->teams[0] );
-?>
-</pre>

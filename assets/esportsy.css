@@ -1,3 +1,7 @@
+/* import responsive styles */
+@import "esportsy-mobile.css" screen and (max-width: 420px);
+@import "esportsy-tablet.css" screen and (max-width: 768px);
+
 .espy-calendar {
 
 }
@@ -7,60 +11,85 @@
  */
 
 .calendar-series {
-  font-family: "Lato", sans-serif;
-  color: #1B0E21;
+  color: #000;
   font-weight: normal;
   border: solid 1px #F7F7F7;
-  background: #FAFAFC;
+  background: #2AACDE7F;
   cursor: pointer;
-  display: flex;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 80px 500px auto;
+  grid-column-gap: 25px;
 }
 .calendar-series:hover {
-  background: #D7D7D7;
+  background: #2AACDE;
 }
 .calendar-series-col {
-  margin: 0 15px;
+  margin: 0;
   overflow: none;
 }
 .calendar-series img {
-  max-width: 60px;
-  margin: 8px 0;
+  display: block;
+  max-width: 80px;
+  margin: 0;
 }
 .calendar-series .col-1 {
-
+  margin: 0 12px 0 0;
+  padding: 0;
 }
 .calendar-series .col-2 h5 {
+  font-size: 14px;
   font-weight: normal;
   margin: 20px 0 6px 0;
-  color: #C2C2C2;
 }
 .calendar-series .col-2 h1 {
-  font-weight: normal;
-  font-size: 18px;
+  font-size: 20px;
   margin: 0;
 }
 .calendar-series .col-3 {
-  padding-top: 35px;
-  font-size: 12px;
-  color: #C9C9C9;
+  padding: 35px 40px 0 0;
+  font-size: 14px;
+  text-align: right;
 }
 
 .espy-calendar header {
-  background: #FFFFFF;
-  padding: 120px 40px 12px 40px;
-  height: 50px;
+  background: #000;
+  padding: 30px 30px 30px 30px;
+  margin: 12px 0 0 0;
+  border-top: solid 12px #40B4E1;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 320px auto;
+  color: #FFF;
 }
+
+@media only screen and (max-width: 600px) {
+
+  .espy-calendar header {
+    grid-template-columns: 100%;
+  }
+
+  .espy-calendar .header-left {
+    padding: 15px 0 15px 0;
+    text-align: center;
+  }
+
+  .espy-calendar .header-right {
+    padding: 15px 0 15px 0;
+    margin: 25px 0 0 0;
+    text-align: center !important;
+  }
+  .espy-calendar .header-right img {
+    margin-bottom: 6px;
+  }
+
+}
+
 .espy-calendar .header-left {
-  width: 25%;
-  min-width: 120px;
-  float: left;
-  padding: 25px 0 0 15px;
+  padding: 15px 0 0 0;
   box-sizing: border-box;
 }
 .espy-calendar .header-right {
-  width: 75%;
-  min-width: 200px;
-  float: left;
   text-align: right;
 }
 
@@ -71,12 +100,11 @@ ul.top-menu {
 }
 
 ul.top-menu li {
-  font-family: "Lato", sans-serif;
   display: inline-block;
-  margin: 0 40px 0 0;
+  margin: 0 20px 0 0;
   text-transform: uppercase;
   font-size: 16px;
-  color: #363636;
+  color: #FFF;
   cursor: pointer;
 }
 ul.top-menu li.selected {
@@ -95,8 +123,10 @@ ul.top-menu li.selected {
   margin: 0 20px 0 0;
   text-transform: uppercase;
   font-size: 14px;
-  font-family: verdana, sans-serif;
   cursor: pointer;
+}
+.filter-menu li:last-child {
+  margin-right: 0;
 }
 
 .filter-menu li img {
@@ -118,5 +148,113 @@ section {
  * Series single
  */
  .series-single {
-   text-align: center;
+
  }
+.series-single header {
+   background: #000;
+   color: #FFF;
+   padding: 0 0 0 0;
+   margin: 0;
+   display: grid;
+   grid-template-columns: 100px 450px auto;
+   grid-column-gap: 25px;
+ }
+.series-single header h1.tournament-title {
+  font-size: 32px;
+}
+.series-single header .game-logo {
+  width: 100px;
+  display: block;
+}
+.series-single header .col-third {
+  text-align: right;
+  padding: 40px 25px 0 30px;
+}
+
+/* series matchup section */
+.series-matchup {
+  background: #29ABDD;
+  padding: 25px 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-column-gap: 25px;
+}
+.series-matchup > div {
+
+}
+.series-matchup > div:first-child {
+  text-align: right;
+}
+.series-matchup .matchup-score {
+  font-size: 50px;
+  color: #FFF;
+  text-align: center;
+  padding: 40px 0 20px 0;
+}
+.series-matchup .matchup-team {
+
+}
+.series-matchup .matchup-team img {
+  width: 80px;
+}
+
+.series-streams {
+  background: #F0F1F5;
+  padding: 25px;
+  margin: 30px 0;
+  text-align: left;
+  overflow: hidden;
+  clear: both;
+}
+.series-streams h2.series-stream-title {
+  color: #2AABDD;
+  font-size: 28px;
+  margin: 0 0 25px 0;
+  font-weight: 400;
+}
+.series-caster {
+  width: 25%;
+}
+.series-caster h2 {
+  font-size: 22px;
+  color: #212121;
+  margin: 0;
+}
+
+.series-tournament-info {
+  background: #29ABDD;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  color: #FFF;
+}
+.series-tournament-info .col-first {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  background: #000000;
+  color: #FFF;
+  padding: 10px 20px 10px 40px;
+}
+.series-tournament-info .col-second {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 10px 20px 10px 40px;
+}
+.series-tournament-info .col-second img {
+  max-width: 100%;
+  display: block;
+}
+.series-tournament-info .col-second h3 {
+  font-weight: 400;
+  font-size: 26px;
+  margin: 12px 0 0 0;
+  text-align: center;
+}
+.series-tournament-info .col-third {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 0 0 30px 30px;
+}
+.series-tournament-info .col-third h1 {
+  font-size: 32px;
+}
