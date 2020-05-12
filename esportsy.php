@@ -28,19 +28,11 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
     require_once( ESPORTSY_PATH . 'src/models/Game.php' );
     require_once( ESPORTSY_PATH . 'src/models/Series.php' );
-    require_once( ESPORTSY_PATH . 'src/models/Match.php' );
     require_once( ESPORTSY_PATH . 'src/sync/Sync.php' );
-    require_once( ESPORTSY_PATH . 'src/sync/SyncRoutine.php' );
     require_once( ESPORTSY_PATH . 'src/sync/SyncInstance.php' );
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesSingle.php' );
     new ShortcodeSeriesSingle();
-
-    require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
-    //new ShortcodeGamesList();
-
-    require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesList.php' );
-    //new ShortcodeSeriesList();
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeTournamentList.php' );
     //new ShortcodeTournamentList();
@@ -65,8 +57,6 @@ class plugin {
     if ( !wp_next_scheduled( 'espy_cron_hook' ) ) {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
-
-    // $this->importSeries();
 
   }
 
