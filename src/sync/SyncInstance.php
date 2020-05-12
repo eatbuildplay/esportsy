@@ -19,7 +19,7 @@ class SyncInstance {
 
     $args = [
       'post_type'   => 'sync_instance',
-      'post_title'  => 'Series import ' . $this->timestamp,
+      'post_title'  => $this->routine . ' - ' . $this->timestamp,
       'post_status' => 'publish'
     ];
     $this->id = wp_insert_post( $args );
@@ -32,10 +32,16 @@ class SyncInstance {
 
   }
 
-  public static function fetchLast() {
+  public static function fetchLast( $postType, $mode ) {
 
     $syncInstancePosts = get_posts([
-      'post_type' => 'sync_instance'
+      'post_type' => 'sync_instance',
+      'meta_query' => [
+        [
+          'key' => 'routine',
+          'value' => $postType . '_' . $mode
+        ]
+      ]
     ]);
 
     if( empty( $syncInstancePosts )) {
