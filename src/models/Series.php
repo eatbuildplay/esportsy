@@ -25,6 +25,10 @@ class Series {
       'post_status' => 'publish'
     ];
     $postId = wp_insert_post( $params );
+
+    Log::add( '$series: ' . print_r($params,1), 'After Series create() - ' . $postId );
+
+
     $this->id = $postId;
     return $postId;
 
@@ -36,7 +40,14 @@ class Series {
       'ID' => $this->id,
       'post_title'  => $this->title
     ];
+
+
+
     $postId = wp_update_post( $params );
+
+    Log::add( '$series: ' . print_r($params,1), 'After Series update()' );
+
+
     $this->id = $postId;
     return $postId;
 
@@ -45,6 +56,9 @@ class Series {
   public function save() {
 
     if( $this->id > 0 || $this->exists() ) {
+
+
+
       $this->id = $this->update();
     } else {
       $this->id = $this->create();
@@ -71,8 +85,10 @@ class Series {
     $posts = get_posts([
       'post_type' => 'series',
       'meta_query' => [
-        'key'   => 'series_id',
-        'value' => $this->seriesId
+        [
+          'key'   => 'series_id',
+          'value' => $this->seriesId
+        ]  
       ]
     ]);
     if( !empty( $posts )) {

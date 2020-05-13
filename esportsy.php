@@ -24,6 +24,7 @@ class plugin {
   public function __construct() {
 
     require_once( ESPORTSY_PATH . 'src/Template.php' );
+    require_once( ESPORTSY_PATH . 'src/log/Log.php' );
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
     require_once( ESPORTSY_PATH . 'src/SeriesImport.php' );

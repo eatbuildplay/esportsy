@@ -129,6 +129,8 @@ class SeriesImport {
       $series->teamB = "TBD";
     }
 
+    Log::add( '$series: ' . print_r($series,1), 'Before Series Save' );
+
     $series->save();
 
   }

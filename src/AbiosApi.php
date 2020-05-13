@@ -57,9 +57,11 @@ class AbiosApi {
 		]);
 		$gameIds = [];
 		foreach( $gamePosts as $gamePost ) {
-			$abiosId = get_post_meta( $gamePost->ID, 'abios_id' );
+			$abiosId = get_post_meta( $gamePost->ID, 'abios_id', 1 );
 			$gameIds[] = $abiosId;
 		}
+
+		Log::add( '$gameIds: ' . print_r($gameIds,1) );
 
     $vars = [
       'access_token' => $token,
@@ -74,6 +76,9 @@ class AbiosApi {
 			'page' => $page
     ];
     $response = $this->call( '/series', 'get', $vars );
+
+		Log::add( '$response: ' . print_r($response,1) );
+
     return $response;
 
   }
