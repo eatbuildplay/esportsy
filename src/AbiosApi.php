@@ -23,13 +23,16 @@ class AbiosApi {
 			'access_token' 	=> $token,
 			'page'					=> $page
 		];
-    $response = $this->call( '/games', 'get', $vars );
 
-    $games = $response->data->data;
+		$response = $this->call( '/games', 'get', $vars );
+
     if( $response->code == 200 ) {
+			$games = $response->data;
       return $games;
     }
+
     return false;
+
   }
 
 	public function fetchTeamsList() {
@@ -45,9 +48,18 @@ class AbiosApi {
 
   public function fetchSeriesByDateRange( $start, $end, $page = 1 ) {
 
-		$gameIds = [1,2,3];
+		$token = $this->fetchToken();
 
-    $token = $this->fetchToken();
+		// get list of games
+		$gamePosts = get_posts([
+			'post_type' => 'game',
+			'posts_per_page' => -1
+		]);
+		$gameIds = [];
+		foreach( $gamePosts as $gamePost ) {
+			$abiosId = get_post_meta( $gamePost->ID, 'abios_id' );
+			$gameIds[] = $abiosId;
+		}
 
     $vars = [
       'access_token' => $token,

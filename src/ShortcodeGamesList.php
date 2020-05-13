@@ -5,13 +5,16 @@ namespace Esportsy;
 class ShortcodeGamesList extends Shortcode {
 
   public $tag = 'espy-games-list';
+  public $templateName = 'games-list';
 
   public function __construct() {
-    $this->templateName = 'games-list';
-    $this->templateData = [
+    parent::__construct();
+  }
+
+  public function loadData() {
+    return [
       'games' => $this->fetchGamesList()
     ];
-    parent::__construct();
   }
 
   public function fetchGamesList() {

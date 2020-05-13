@@ -35,11 +35,8 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesSingle.php' );
     new ShortcodeSeriesSingle();
 
-    require_once( ESPORTSY_PATH . 'src/ShortcodeTournamentList.php' );
-    //new ShortcodeTournamentList();
-
-    require_once( ESPORTSY_PATH . 'src/ShortcodeTeamsList.php' );
-    //new ShortcodeTeamsList();
+    require_once( ESPORTSY_PATH . 'src/ShortcodeGamesList.php' );
+    new ShortcodeGamesList();
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeCalendar.php' );
     new ShortcodeCalendar();

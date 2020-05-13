@@ -19,17 +19,7 @@ class SeriesImport {
     if( !$syncLast ) {
       $this->date = new \DateTime();
     } else {
-
-      $today = new \DateTime();
-      $this->date = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
-
-      // advance to next day if all pages imported
-      if( $syncLast->currentPage == $syncLast->lastPage ) {
-        $this->date->modify('+1 day');
-      } else {
-        $page = $syncLast->currentPage +1;
-      }
-
+      $this->setDate( $syncLast );
     }
 
     $range = $this->calcTimeRange();
@@ -46,6 +36,27 @@ class SeriesImport {
 
     // update tracker
     $this->updateTracker( $response );
+
+  }
+
+  public function setDate( $syncLast ) {
+
+    $importRangeComplete = $this->importRangeComplete( $syncLast );
+    if( $importRangeComplete ) {
+      $this->date = new \DateTime();
+      $this->date->modify('-3 day');
+      return;
+    }
+
+    // advance to next day if all pages imported
+    if( $syncLast->currentPage >= $syncLast->lastPage ) {
+      $this->date = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
+      $this->date->modify('+1 day');
+    } else {
+      // next page same date
+      $this->date = \DateTime::createFromFormat( 'Y-m-d', $syncLast->dateImport );
+      $this->page = $syncLast->currentPage +1;
+    }
 
   }
 
