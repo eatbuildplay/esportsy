@@ -16,6 +16,7 @@ class Series {
   public $gameLogo;
   public $teamA;
   public $teamB;
+  public $streams;
 
   public function create() {
 
@@ -88,7 +89,7 @@ class Series {
         [
           'key'   => 'series_id',
           'value' => $this->seriesId
-        ]  
+        ]
       ]
     ]);
     if( !empty( $posts )) {
@@ -164,6 +165,86 @@ class Series {
     $series->teamA = get_post_meta( $seriesPost->ID, 'team_a', 1 );
     $series->teamB = get_post_meta( $seriesPost->ID, 'team_b', 1 );
     return $series;
+  }
+
+  /*
+   * Stream handling methods
+   */
+  public function loadStreams( $casters ) {
+
+    if( empty( $casters )) {
+      $this->streams = false;
+    }
+    $this->streams = new \stdClass;
+    $this->streams->casters = [];
+
+    foreach( $casters as $caster ) {
+      // filter out not Twitch
+
+      // setup the url for Twitch iframe
+
+
+      // add to streams->casters
+      $this->streams->casters[] = $caster;
+
+    }
+
+  }
+
+  public function hasStreams() {
+    if( is_null( $this->streams ) || !$this->streams ) {
+      return false;
+    }
+    return true;
+  }
+
+  public function renderStream() {
+
+    // match over no stream
+    if( $this->isOver ):
+      print '<h3>This match is over, no live streams are available.</h3>';
+      return;
+    endif;
+
+    // match upcoming no stream
+    $now = new \DateTime;
+    $seriesStart = \DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
+
+    if( $now >= $seriesStart ) {
+      print '<h3>This match has not started yet please visit again at the start time, ' . $this->start . '.</h3>';
+
+      return;
+    }
+
+
+    // match has no streams
+    if( !$this->hasStreams() ):
+      print '<h3>This match has no streams available.</h3>';
+      return;
+    endif;
+
+    // finally we get to show stream!
+    print '<ul>';
+    foreach( $this->streams->casters as $caster ):
+      print '<li class="series-caster">';
+      print '<img src="' . $caster->country->images->default . '" />';
+      print '<h2>' . $caster->name . '</h2>';
+      print '</li>';
+    endforeach;
+    print '</ul>';
+
+    $selectedCaster = $this->streams->casters[0];
+    var_dump( $selectedCaster );
+
+    print '<iframe
+      src="https://player.twitch.tv/?channel=' . $selectedCaster->name . '"
+      height="720"
+      width="1280"
+      frameborder="0"
+      scrolling="no"
+      allowfullscreen="true">
+    </iframe>';
+
   }
 
   /*

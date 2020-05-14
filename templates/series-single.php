@@ -42,33 +42,12 @@
 
   <!-- Available Streams -->
   <div class="series-streams">
-    <h2 class="series-stream-title">Available Streams</h2>
-    <?php foreach( $series->extra->casters as $caster ): ?>
-      <a href="<?php print $caster->url; ?>">
-        <div class="series-caster">
-          <img src="<?php print $caster->country->images->default; ?>" />
-          <h2><?php print $caster->name; ?></h2>
-        </div>
-      </a>
-    <?php endforeach; ?>
-
-    <?php
-
-      $caster = $series->extra->casters[0];
-      $casterStream = $caster->stream;
-
-    ?>
-
-    <!-- Twitch Embed -->
-    <iframe
-      src="https://player.twitch.tv/?channel=<?php print $casterStream->username; ?>"
-      height="720"
-      width="1280"
-      frameborder="0"
-      scrolling="no"
-      allowfullscreen="true">
-    </iframe>
-
+    <div class="col-first">
+      <h2 class="series-stream-title">Event Live Stream</h2>
+    </div>
+    <div class="col-second">
+      <?php $series->renderStream(); ?>
+    </div>
   </div>
 
   <!-- Tournament Info -->

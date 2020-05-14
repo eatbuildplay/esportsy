@@ -21,6 +21,8 @@ class ShortcodeSeriesSingle extends Shortcode {
     $api = new \Esportsy\AbiosApi();
     $series->extra = $api->fetchSeries( $series->seriesId );
 
+    $series->loadStreams( $series->extra->casters );
+
     return [
       'series' => $series
     ];
