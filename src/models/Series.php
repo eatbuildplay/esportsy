@@ -212,10 +212,8 @@ class Series {
 
     if( $now >= $seriesStart ) {
       print '<h3>This match has not started yet please visit again at the start time, ' . $this->start . '.</h3>';
-
       return;
     }
-
 
     // match has no streams
     if( !$this->hasStreams() ):
@@ -234,8 +232,6 @@ class Series {
     print '</ul>';
 
     $selectedCaster = $this->streams->casters[0];
-    var_dump( $selectedCaster );
-
     print '<iframe
       src="https://player.twitch.tv/?channel=' . $selectedCaster->name . '"
       height="720"
