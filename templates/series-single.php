@@ -1,13 +1,3 @@
-<?php
-
-global $post;
-$series = \Esportsy\Series::loadFromPost( $post );
-
-$api = new \Esportsy\AbiosApi();
-$series->extra = $api->fetchSeries( $series->seriesId );
-
-?>
-
 <div class="series-single">
 
   <!-- series header -->
@@ -61,6 +51,24 @@ $series->extra = $api->fetchSeries( $series->seriesId );
         </div>
       </a>
     <?php endforeach; ?>
+
+    <?php
+
+      $caster = $series->extra->casters[0];
+      $casterStream = $caster->stream;
+
+    ?>
+
+    <!-- Twitch Embed -->
+    <iframe
+      src="https://player.twitch.tv/?channel=<?php print $casterStream->username; ?>"
+      height="720"
+      width="1280"
+      frameborder="0"
+      scrolling="no"
+      allowfullscreen="true">
+    </iframe>
+
   </div>
 
   <!-- Tournament Info -->

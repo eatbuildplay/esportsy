@@ -14,7 +14,17 @@ class ShortcodeSeriesSingle extends Shortcode {
   }
 
   public function loadData() {
-    return [];
+
+    global $post;
+    $series = \Esportsy\Series::loadFromPost( $post );
+
+    $api = new \Esportsy\AbiosApi();
+    $series->extra = $api->fetchSeries( $series->seriesId );
+
+    return [
+      'series' => $series
+    ];
+
   }
 
 }
