@@ -226,7 +226,7 @@ class Series {
     // finally we get to show stream!
     print '<ul>';
     foreach( $this->streams->casters as $caster ):
-      print '<li class="series-caster">';
+      print '<li class="series-caster" data-caster="' . $caster->name . '">';
       print '<img src="' . $caster->country->images->default . '" />';
       print '<h2>' . $caster->name . '</h2>';
       print '</li>';
@@ -240,7 +240,8 @@ class Series {
       width="1280"
       frameborder="0"
       scrolling="no"
-      allowfullscreen="true">
+      allowfullscreen="true"
+      id="cast">
     </iframe>';
 
   }

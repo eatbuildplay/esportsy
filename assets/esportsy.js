@@ -1,5 +1,23 @@
 (function($) {
 
+  var series = {
+
+    init: function() {
+      series.streamChange();
+    },
+
+    streamChange: function() {
+      $(document).on('click','li.series-caster', function() {
+        console.log('change stream...');
+        var caster = $(this).data('caster');
+        $('iframe#cast').attr('src', 'https://player.twitch.tv/?channel=' + caster)
+      })
+    }
+
+  }
+
+  series.init();
+
   var calendar = {
 
     canvas: $('#calendar-canvas'),
