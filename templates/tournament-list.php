@@ -1,7 +1,5 @@
 <?php
 
-var_dump( $tournaments );
-
 foreach($tournaments as $tournament) {
   print '<div>';
   print '<h5>' . $tournament->id . '</h5>';

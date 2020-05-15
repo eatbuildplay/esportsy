@@ -174,15 +174,17 @@ class Series {
 
     if( empty( $casters )) {
       $this->streams = false;
+      return;
     }
     $this->streams = new \stdClass;
     $this->streams->casters = [];
 
     foreach( $casters as $caster ) {
+
       // filter out not Twitch
-
-      // setup the url for Twitch iframe
-
+      if( $caster->stream->platform->name != 'Twitch' ) {
+        continue;
+      }
 
       // add to streams->casters
       $this->streams->casters[] = $caster;
@@ -210,7 +212,7 @@ class Series {
     $now = new \DateTime;
     $seriesStart = \DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
 
-    if( $now >= $seriesStart ) {
+    if( $now <= $seriesStart ) {
       print '<h3>This match has not started yet please visit again at the start time, ' . $this->start . '.</h3>';
       return;
     }
