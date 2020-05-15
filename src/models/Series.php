@@ -182,7 +182,7 @@ class Series {
     foreach( $casters as $caster ) {
 
       // filter out not Twitch
-      if( $caster->stream->platform->name != 'Twitch' ) {
+      if( !isset($caster->stream->platform) || $caster->stream->platform->name != 'Twitch' ) {
         continue;
       }
 
