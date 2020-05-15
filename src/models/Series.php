@@ -119,7 +119,7 @@ class Series {
 
       $query['meta_query'][] = [
         'key'     => 'start',
-        'value'   => date('Y-m-d h:i:s'),
+        'value'   => date('Y-m-d H:i:s'),
         'compare' => '>='
       ];
       $query['order'] = 'ASC';

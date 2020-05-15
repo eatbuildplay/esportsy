@@ -8,15 +8,8 @@ class ShortcodeSeriesList extends Shortcode {
 
   public function __construct() {
     $this->templateName = 'series-list';
-    $this->templateData = [
-      'seriesList' => $this->fetchSeriesList()
-    ];
+    $this->templateData = [];
     parent::__construct();
-  }
-
-  public function fetchSeriesList() {
-    $api = new AbiosApi();
-    return $api->fetchSeriesList();
   }
 
 }
