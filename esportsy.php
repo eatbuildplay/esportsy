@@ -24,6 +24,7 @@ class plugin {
   public function __construct() {
 
     require_once( ESPORTSY_PATH . 'src/Template.php' );
+    require_once( ESPORTSY_PATH . 'src/PostType.php' );
     require_once( ESPORTSY_PATH . 'src/log/Log.php' );
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
@@ -32,6 +33,12 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/models/Series.php' );
     require_once( ESPORTSY_PATH . 'src/sync/Sync.php' );
     require_once( ESPORTSY_PATH . 'src/sync/SyncInstance.php' );
+
+    // CPT
+    require_once( ESPORTSY_PATH . 'src/cpt/LogPostType.php' );
+    require_once( ESPORTSY_PATH . 'src/cpt/SyncInstancePostType.php' );
+    require_once( ESPORTSY_PATH . 'src/cpt/GamePostType.php' );
+    require_once( ESPORTSY_PATH . 'src/cpt/SeriesPostType.php' );
 
     require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesSingle.php' );
     new ShortcodeSeriesSingle();
@@ -52,10 +59,24 @@ class plugin {
     // enqueue scripts
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
 
+    // schedule cron
     add_action( 'espy_cron_hook', [$this, 'cron']);
     if ( !wp_next_scheduled( 'espy_cron_hook' ) ) {
       wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
     }
+
+    // register CPT's
+    $pt = new LogPostType;
+    $pt->register();
+
+    $pt = new SyncInstancePostType;
+    $pt->register();
+
+    $pt = new GamePostType;
+    $pt->register();
+
+    $pt = new SeriesPostType;
+    $pt->register();
 
   }
 
