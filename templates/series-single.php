@@ -11,7 +11,7 @@
       </h1>
     </div>
     <div class="col-third">
-      <?php print $series->title; ?> / Best of <?php print $series->extra->bestOf; ?> / <?php print $series->start; ?>
+      <?php print $series->title; ?> / Best of <?php print $series->extra->bestOf; ?> / <span class="datetime"><?php print $series->start; ?></span>
     </div>
   </header>
 

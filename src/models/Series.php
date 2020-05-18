@@ -213,7 +213,7 @@ class Series {
     $seriesStart = \DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
 
     if( $now <= $seriesStart ) {
-      print '<h3>This match has not started yet please visit again at the start time, ' . $this->start . '.</h3>';
+      print '<h3>This match has not started yet please visit again at the start time, <span class="datetime">' . $this->start . '</span>.</h3>';
       return;
     }
 

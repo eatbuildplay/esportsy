@@ -1,19 +1,34 @@
 (function($) {
 
-  var timeZone = moment.tz.guess();
-  console.log('timeZone: ' +timeZone );
-  var time = new Date();
-  var timeZoneOffset = time.getTimezoneOffset();
-  console.log('offset: ' +timeZoneOffset);
-  moment.tz.zone(timeZone).abbr(timeZoneOffset);
-
   /*
    * Series
    */
   var series = {
 
     init: function() {
+
       series.streamChange();
+
+      // localize time header
+      seriesTimeEl = $('.series-single header .datetime');
+      if( seriesTimeEl.length ) {
+        var seriesTime = seriesTimeEl.text();
+        console.log( seriesTime )
+        var startUtc = moment.utc( seriesTime ).toDate();
+        var local = moment(startUtc).local().format('YYYY-MM-DD h:mmA');
+        seriesTimeEl.text( local );
+      }
+
+
+      // localize time streams
+      if( seriesTimeEl.length ) {
+        var seriesTimeEl = $('.series-single .series-streams .datetime');
+        var seriesTime = seriesTimeEl.text()
+        var startUtc = moment.utc( seriesTime ).toDate();
+        var local = moment(startUtc).local().format('YYYY-MM-DD h:mmA');
+        seriesTimeEl.text( local );
+      }
+
     },
 
     streamChange: function() {
@@ -127,6 +142,17 @@
         console.log( response )
 
         calendar.canvas.html( response.html );
+
+        // show local times
+        $('.calendar-series-col.col-3').each(function( index, seriesTimeDiv ) {
+
+          var seriesTimeEl = $(seriesTimeDiv);
+          var seriesTime = seriesTimeEl.text()
+          var startUtc = moment.utc( seriesTime ).toDate();
+          var local = moment(startUtc).local().format('YYYY-MM-DD h:mmA');
+          seriesTimeEl.text( local );
+
+        });
 
       });
 
