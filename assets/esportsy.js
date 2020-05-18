@@ -1,5 +1,15 @@
 (function($) {
 
+  var timeZone = moment.tz.guess();
+  console.log('timeZone: ' +timeZone );
+  var time = new Date();
+  var timeZoneOffset = time.getTimezoneOffset();
+  console.log('offset: ' +timeZoneOffset);
+  moment.tz.zone(timeZone).abbr(timeZoneOffset);
+
+  /*
+   * Series
+   */
   var series = {
 
     init: function() {
@@ -18,6 +28,9 @@
 
   series.init();
 
+  /*
+   * Calendar
+   */
   var calendar = {
 
     canvas: $('#calendar-canvas'),

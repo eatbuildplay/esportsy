@@ -97,11 +97,39 @@ class plugin {
       '1.0.0'
     );
 
+    // moment js
+    wp_enqueue_script(
+      'moment-js',
+      ESPORTSY_URL . 'assets/moment.min.js',
+      array( 'jquery' ),
+      '2.25.3',
+      true
+    );
+
+    // moment locales js
+    /*
+    wp_enqueue_script(
+      'moment-locales-js',
+      ESPORTSY_URL . 'assets/moment-with-locales.min.js',
+      array( 'jquery' ),
+      '2.25.3',
+      true
+    ); */
+
+    // moment tz
+    wp_enqueue_script(
+      'moment-tz-js',
+      ESPORTSY_URL . 'assets/moment-tz.min.js',
+      array( 'jquery' ),
+      '0.5.31',
+      true
+    );
+
     // main js
     wp_enqueue_script(
       'esportsy-main-js',
       ESPORTSY_URL . 'assets/esportsy.js',
-      array( 'jquery' ),
+      array( 'jquery', 'moment-js', 'moment-tz-js' ),
       '1.0.0',
       true
     );
