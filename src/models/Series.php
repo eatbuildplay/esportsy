@@ -116,11 +116,10 @@ class Series {
     }
 
     if( $schedule == 'upcoming' ) {
-
+      
       $query['meta_query'][] = [
-        'key'     => 'start',
-        'value'   => date('Y-m-d H:i:s'),
-        'compare' => '>='
+        'key'     => 'is_over',
+        'value'   => 0,
       ];
       $query['order'] = 'ASC';
       $query['orderby'] = 'meta_value';
@@ -129,9 +128,8 @@ class Series {
     } elseif( $schedule == 'results' ) {
 
       $query['meta_query'][] = [
-        'key'     => 'start',
-        'value'   => date('Y-m-d H:i:s'),
-        'compare' => '<='
+        'key'     => 'is_over',
+        'value'   => 1,
       ];
       $query['order'] = 'DESC';
       $query['orderby'] = 'meta_value';
