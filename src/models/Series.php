@@ -9,6 +9,7 @@ class Series {
   public $title;
   public $start;
   public $isOver;
+  public $live = 0;
   public $tournamentId = 0;
   public $tournamentTitle;
   public $gameId = 0;
@@ -116,7 +117,7 @@ class Series {
     }
 
     if( $schedule == 'upcoming' ) {
-      
+
       $query['meta_query'][] = [
         'key'     => 'is_over',
         'value'   => 0,
@@ -162,6 +163,16 @@ class Series {
     $series->gameTitle = get_post_meta( $seriesPost->ID, 'game_title', 1 );
     $series->teamA = get_post_meta( $seriesPost->ID, 'team_a', 1 );
     $series->teamB = get_post_meta( $seriesPost->ID, 'team_b', 1 );
+
+    // flag live
+
+    $now = new \DateTime;
+    $seriesStart = \DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
+
+    if( $now >= $seriesStart && !$series->isOver ) {
+      $this->live = 1;
+    }
+
     return $series;
   }
 
