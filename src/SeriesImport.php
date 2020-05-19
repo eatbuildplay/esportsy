@@ -109,7 +109,7 @@ class SeriesImport {
     $series->title = $seriesData->title;
     $series->start = $seriesData->start;
     if( !is_null($seriesData->end)) {
-      $series->isOver = true;
+      $series->isOver = 1;
     }
     $series->gameId = $seriesData->game->id;
     $series->gameTitle = $seriesData->game->title;

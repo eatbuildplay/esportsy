@@ -8,7 +8,14 @@
   </div>
 
   <div class="calendar-series-col col-3">
-    <?php print $series->start; ?>
+    <?php
+      if( $series->live ) {
+        print "<span class='live-flag'>LIVE NOW</span>";
+      } else {
+    ?>
+      <p class="start-time" style="margin:0;"><?php print $series->start; ?></p>
+    <?php } ?>
+
   </div>
 
 </article>

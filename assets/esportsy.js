@@ -144,7 +144,7 @@
         calendar.canvas.html( response.html );
 
         // show local times
-        $('.calendar-series-col.col-3').each(function( index, seriesTimeDiv ) {
+        $('.calendar-series-col.col-3 .start-time').each(function( index, seriesTimeDiv ) {
 
           var seriesTimeEl = $(seriesTimeDiv);
           var seriesTime = seriesTimeEl.text()

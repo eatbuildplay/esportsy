@@ -15,6 +15,15 @@
 
 namespace Esportsy;
 
+/*
+$post=get_post(14963);
+$meta=get_post_meta($post->ID);
+print '<pre>';
+var_dump( $meta );
+print '</pre>';
+die();
+*/
+
 define( 'ESPORTSY_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ESPORTSY_URL', plugin_dir_url( __FILE__ ) );
 define( 'ESPORTSY_VERSION', '1.2.0' );

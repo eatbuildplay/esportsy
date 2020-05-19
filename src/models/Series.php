@@ -8,7 +8,7 @@ class Series {
   public $seriesId = 0;
   public $title;
   public $start;
-  public $isOver;
+  public $isOver = 0;
   public $live = 0;
   public $tournamentId = 0;
   public $tournamentTitle;
@@ -165,12 +165,11 @@ class Series {
     $series->teamB = get_post_meta( $seriesPost->ID, 'team_b', 1 );
 
     // flag live
-
     $now = new \DateTime;
-    $seriesStart = \DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
+    $seriesStart = \DateTime::createFromFormat('Y-m-d H:i:s', $series->start);
 
     if( $now >= $seriesStart && !$series->isOver ) {
-      $this->live = 1;
+      $series->live = 1;
     }
 
     return $series;
