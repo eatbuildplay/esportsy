@@ -13,7 +13,9 @@ class SeriesImportToday extends SeriesImport {
 
     $syncLast = SyncInstance::fetchLast('series', $this->mode);
     if( $syncLast ) {
-      $this->page = $syncLast->currentPage +1;
+      if( $syncLast->currentPage < $syncLast->lastPage ) {
+        $this->page = $syncLast->currentPage +1;
+      }
     }
 
     $range = $this->calcTimeRange();
