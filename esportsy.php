@@ -15,15 +15,6 @@
 
 namespace Esportsy;
 
-/*
-$post=get_post(14963);
-$meta=get_post_meta($post->ID);
-print '<pre>';
-var_dump( $meta );
-print '</pre>';
-die();
-*/
-
 define( 'ESPORTSY_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ESPORTSY_URL', plugin_dir_url( __FILE__ ) );
 define( 'ESPORTSY_VERSION', '1.2.0' );
@@ -38,6 +29,7 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
     require_once( ESPORTSY_PATH . 'src/SeriesImport.php' );
+    require_once( ESPORTSY_PATH . 'src/SeriesImportToday.php' );
     require_once( ESPORTSY_PATH . 'src/models/Game.php' );
     require_once( ESPORTSY_PATH . 'src/models/Series.php' );
     require_once( ESPORTSY_PATH . 'src/sync/Sync.php' );
@@ -69,9 +61,14 @@ class plugin {
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
 
     // schedule cron
-    add_action( 'espy_cron_hook', [$this, 'cron']);
-    if ( !wp_next_scheduled( 'espy_cron_hook' ) ) {
-      wp_schedule_event( time(), 'everyminute', 'espy_cron_hook' );
+    add_action( 'espy_series_import_cron', [$this, 'seriesImportCron']);
+    if ( !wp_next_scheduled( 'espy_series_import_cron' ) ) {
+      wp_schedule_event( time(), 'everyfiveminutes', 'espy_series_import_cron' );
+    }
+
+    add_action( 'espy_series_import_today_cron', [$this, 'seriesImportTodayCron']);
+    if ( !wp_next_scheduled( 'espy_series_import_today_cron' ) ) {
+      wp_schedule_event( time(), 'everytwominutes', 'espy_series_import_today_cron' );
     }
 
     // register CPT's
@@ -89,9 +86,16 @@ class plugin {
 
   }
 
-  public function cron() {
+  public function seriesImportCron() {
 
     $importer = new SeriesImport;
+    $importer->run();
+
+  }
+
+  public function seriesImportTodayCron() {
+
+    $importer = new SeriesImportToday;
     $importer->run();
 
   }
