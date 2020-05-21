@@ -41,11 +41,14 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/cpt/GamePostType.php' );
     require_once( ESPORTSY_PATH . 'src/cpt/SeriesPostType.php' );
 
-    require_once( ESPORTSY_PATH . 'src/ShortcodeSeriesSingle.php' );
+    require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeSeriesSingle.php' );
     new ShortcodeSeriesSingle();
 
-    require_once( ESPORTSY_PATH . 'src/ShortcodeCalendar.php' );
+    require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeCalendar.php' );
     new ShortcodeCalendar();
+
+    require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeCalendarHome.php' );
+    new ShortcodeCalendarHome();
 
     // do init at init
     add_action('init', [$this, 'init']);
