@@ -28,9 +28,6 @@ class Series {
     ];
     $postId = wp_insert_post( $params );
 
-    Log::add( '$series: ' . print_r($params,1), 'After Series create() - ' . $postId );
-
-
     $this->id = $postId;
     return $postId;
 
@@ -46,9 +43,6 @@ class Series {
 
 
     $postId = wp_update_post( $params );
-
-    Log::add( '$series: ' . print_r($params,1), 'After Series update()' );
-
 
     $this->id = $postId;
     return $postId;

@@ -61,8 +61,6 @@ class AbiosApi {
 			$gameIds[] = $abiosId;
 		}
 
-		Log::add( '$gameIds: ' . print_r($gameIds,1) );
-
     $vars = [
       'access_token' => $token,
       'with' => array(
@@ -76,8 +74,6 @@ class AbiosApi {
 			'page' => $page
     ];
     $response = $this->call( '/series', 'get', $vars );
-
-		Log::add( '$response: ' . print_r($response,1) );
 
     return $response;
 
@@ -184,11 +180,6 @@ class AbiosApi {
 			}
 
 		}
-
-
-		/*
-     * Do logging here!
-     */
 
 		return $response;
 

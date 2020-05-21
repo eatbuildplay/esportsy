@@ -25,7 +25,6 @@ class plugin {
 
     require_once( ESPORTSY_PATH . 'src/Template.php' );
     require_once( ESPORTSY_PATH . 'src/PostType.php' );
-    require_once( ESPORTSY_PATH . 'src/log/Log.php' );
     require_once( ESPORTSY_PATH . 'src/Shortcode.php' );
     require_once( ESPORTSY_PATH . 'src/AbiosApi.php' );
     require_once( ESPORTSY_PATH . 'src/SeriesImport.php' );
@@ -36,10 +35,13 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/sync/SyncInstance.php' );
 
     // CPT
-    require_once( ESPORTSY_PATH . 'src/cpt/LogPostType.php' );
     require_once( ESPORTSY_PATH . 'src/cpt/SyncInstancePostType.php' );
     require_once( ESPORTSY_PATH . 'src/cpt/GamePostType.php' );
     require_once( ESPORTSY_PATH . 'src/cpt/SeriesPostType.php' );
+
+    require_once( ESPORTSY_PATH . 'src/cpt/LogPostType.php' );
+
+
 
     require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeSeriesSingle.php' );
     new ShortcodeSeriesSingle();
@@ -61,7 +63,7 @@ class plugin {
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
 
     // schedule cron
-    // add_action( 'espy_series_import_cron', [$this, 'seriesImportCron']);
+    add_action( 'espy_series_import_cron', [$this, 'seriesImportCron']);
     if ( !wp_next_scheduled( 'espy_series_import_cron' ) ) {
       wp_schedule_event( time(), 'everyfiveminutes', 'espy_series_import_cron' );
     }
@@ -71,10 +73,6 @@ class plugin {
       wp_schedule_event( time(), 'everytwominutes', 'espy_series_import_today_cron' );
     }
 
-    // register CPT's
-    $pt = new LogPostType;
-    $pt->register();
-
     $pt = new SyncInstancePostType;
     $pt->register();
 
@@ -82,6 +80,9 @@ class plugin {
     $pt->register();
 
     $pt = new SeriesPostType;
+    $pt->register();
+
+    $pt = new LogPostType;
     $pt->register();
 
   }
