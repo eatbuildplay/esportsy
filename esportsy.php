@@ -70,7 +70,7 @@ class plugin {
 
     // add_action( 'espy_series_import_today_cron', [$this, 'seriesImportTodayCron']);
     if ( !wp_next_scheduled( 'espy_series_import_today_cron' ) ) {
-      wp_schedule_event( time(), 'everytwominutes', 'espy_series_import_today_cron' );
+      wp_schedule_event( time(), 'everyfiveminutes', 'espy_series_import_today_cron' );
     }
 
     $pt = new SyncInstancePostType;
