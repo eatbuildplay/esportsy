@@ -61,12 +61,12 @@ class plugin {
     add_action('wp_enqueue_scripts', [$this, 'scripts']);
 
     // schedule cron
-    add_action( 'espy_series_import_cron', [$this, 'seriesImportCron']);
+    // add_action( 'espy_series_import_cron', [$this, 'seriesImportCron']);
     if ( !wp_next_scheduled( 'espy_series_import_cron' ) ) {
       wp_schedule_event( time(), 'everyfiveminutes', 'espy_series_import_cron' );
     }
 
-    add_action( 'espy_series_import_today_cron', [$this, 'seriesImportTodayCron']);
+    // add_action( 'espy_series_import_today_cron', [$this, 'seriesImportTodayCron']);
     if ( !wp_next_scheduled( 'espy_series_import_today_cron' ) ) {
       wp_schedule_event( time(), 'everytwominutes', 'espy_series_import_today_cron' );
     }

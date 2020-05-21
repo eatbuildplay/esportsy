@@ -100,11 +100,11 @@ class Series {
     return false;
   }
 
-  public static function fetch( $games = [], $schedule = 'upcoming' ) {
+  public static function fetch( $games = [], $schedule = 'upcoming', $limit = 50 ) {
 
     $query = [
       'post_type' => 'Series',
-      'posts_per_page' => 100,
+      'posts_per_page' => $limit,
       'meta_query' => []
     ];
 

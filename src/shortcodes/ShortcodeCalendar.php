@@ -28,7 +28,7 @@ class ShortcodeCalendar extends Shortcode {
     $schedule = $params['filters']['schedule'];
     $shortcode = $params['shortcode'];
 
-    $seriesList = $this->fetchSeriesList( $games, $schedule );
+    $seriesList = $this->fetchSeriesList( $games, $schedule, $shortcode );
 
     $code = 200;
     $message = 'okay';
@@ -61,9 +61,14 @@ class ShortcodeCalendar extends Shortcode {
 
   }
 
-  public function fetchSeriesList( $games, $schedule ) {
+  public function fetchSeriesList( $games, $schedule, $shortcode ) {
 
-    $series = Series::fetch( $games, $schedule );
+    if( $shortcode == 'home' ) {
+      $limit = 10;
+    } else {
+      $limit = 50;
+    }
+    $series = Series::fetch( $games, $schedule, $limit );
     return $series;
 
   }
