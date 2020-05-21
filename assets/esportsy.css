@@ -1,6 +1,6 @@
 /* import responsive styles */
-@import "esportsy-mobile.css" screen and (max-width: 420px);
-@import "esportsy-tablet.css" screen and (max-width: 768px);
+@import "./esportsy-mobile.css" screen and (max-width: 420px);
+@import "./esportsy-tablet.css" screen and (max-width: 768px);
 
 .espy-calendar {
 
@@ -268,4 +268,60 @@ li.series-caster:hover {
 }
 .series-tournament-info .col-third h1 {
   font-size: 32px;
+}
+
+/*
+ * Calendar home widget
+ */
+.espy-calendar-home section {
+  padding: 0;
+}
+.espy-calendar-home header {
+  display: block;
+  padding: 15px 20px 20px 20px;
+}
+.espy-calendar-home .header-left,
+.espy-calendar-home .header-right {
+  width: 100%;
+  text-align: center;
+}
+.espy-calendar-home .filter-menu {
+  text-align: center;
+}
+.espy-calendar-home .filter-menu li {
+  margin-right: 12px;
+}
+.espy-calendar-home .filter-menu li img {
+  width: 42px;
+}
+.espy-calendar-home .header-right {
+  margin-top: 22px;
+}
+.espy-calendar-home ul.top-menu li {
+  font-size: 15px;
+}
+.espy-calendar-home .calendar-series {
+  color: #000;
+  font-weight: normal;
+  border: solid 1px #F7F7F7;
+  background: #2AACDE7F;
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 60px auto;
+  grid-column-gap: 20px;
+}
+.espy-calendar-home .calendar-series img {
+  max-width: 60px;
+}
+.espy-calendar-home .calendar-series-col.col-2 span {
+  font-size: 10px;
+}
+.espy-calendar-home .calendar-series-col.col-2 h5 {
+  font-size: 10px;
+  margin: 0;
+}
+.espy-calendar-home .calendar-series-col.col-2 h1 {
+  font-size: 12px;
+  margin: 0;
 }

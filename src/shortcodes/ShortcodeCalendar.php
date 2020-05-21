@@ -26,6 +26,7 @@ class ShortcodeCalendar extends Shortcode {
     $params = $_POST['params'];
     $games = $params['filters']['games'];
     $schedule = $params['filters']['schedule'];
+    $shortcode = $params['shortcode'];
 
     $seriesList = $this->fetchSeriesList( $games, $schedule );
 
@@ -33,7 +34,13 @@ class ShortcodeCalendar extends Shortcode {
     $message = 'okay';
 
     $template = new Template;
-    $template->name = 'calendar-series';
+
+    if( $shortcode == 'home' ) {
+      $template->name = 'calendar-home-series';
+    } else {
+      $template->name = 'calendar-series';
+    }
+
     $html = '';
 
     foreach( $seriesList as $series ) {

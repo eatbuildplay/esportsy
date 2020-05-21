@@ -115,6 +115,14 @@
 
     draw: function() {
 
+      // determine if homepage shortcode
+      var calendarEl = $('.espy-calendar');
+      if( calendarEl.hasClass('espy-calendar-home')) {
+        var shortcode = 'home';
+      } else {
+        var shortcode = 'default';
+      }
+
       // setup games filter
       var gameFilter = [];
       var $gamesSelected = $('.filter-menu li.selected');
@@ -129,7 +137,8 @@
         filters: {
           games: gameFilter,
           schedule: scheduleFilter
-        }
+        },
+        shortcode: shortcode
       }
 
       data = {
