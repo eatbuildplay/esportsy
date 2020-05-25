@@ -40,6 +40,11 @@
     </div>
   </div>
 
+  <!-- Betting -->
+  <div class="series-odds">
+    SERIES ODDS
+  </div>
+
   <!-- Available Streams -->
   <div class="series-streams">
     <div class="col-first">

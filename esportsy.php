@@ -41,8 +41,6 @@ class plugin {
 
     require_once( ESPORTSY_PATH . 'src/cpt/LogPostType.php' );
 
-
-
     require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeSeriesSingle.php' );
     new ShortcodeSeriesSingle();
 
@@ -51,6 +49,9 @@ class plugin {
 
     require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeCalendarHome.php' );
     new ShortcodeCalendarHome();
+
+    // register fields 
+    require_once( ESPORTSY_PATH . 'src/fields/fields.php' );
 
     // do init at init
     add_action('init', [$this, 'init']);
@@ -68,9 +69,9 @@ class plugin {
       wp_schedule_event( time(), 'every_fifteen_minutes', 'espy_series_import_cron' );
     }
 
-    // add_action( 'espy_series_import_today_cron', [$this, 'seriesImportTodayCron']);
+    add_action( 'espy_series_import_today_cron', [$this, 'seriesImportTodayCron']);
     if ( !wp_next_scheduled( 'espy_series_import_today_cron' ) ) {
-      wp_schedule_event( time(), 'everyfiveminutes', 'espy_series_import_today_cron' );
+      wp_schedule_event( time(), 'every_five_minutes', 'espy_series_import_today_cron' );
     }
 
     $pt = new SyncInstancePostType;
