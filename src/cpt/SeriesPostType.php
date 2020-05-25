@@ -10,4 +10,8 @@ class SeriesPostType extends PostType {
     return 'series';
   }
 
+  public function getNamePlural() {
+    return $this->getNameSingular();
+  }
+
 }
