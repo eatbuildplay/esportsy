@@ -42,7 +42,40 @@
 
   <!-- Betting -->
   <div class="series-odds">
-    SERIES ODDS
+
+    <header>
+      <h2>Place Your Bets</h2>
+    </header>
+
+    <?php
+      $oddsList = $series->extra->sportsbook_odds;
+    ?>
+
+    <?php
+
+      if( !empty( $oddsList )) :
+        foreach( $oddsList as $odds ) :
+
+    ?>
+
+    <h3><?php print $odds->sportsbook; ?></h3>
+
+
+  <?php endforeach; endif; ?>
+
+    <?php
+
+      // pass me $odds;
+
+      // $odds['sportsbook'] uppercase it
+      // $odds['link'] replace {affiliate_tag}
+      // $moneyline = $odds['moneyline']
+      // $moneyline['home']
+      // $moneyline['home_bet_slip']
+      // $moneyline['away']
+      // $moneyline['away_bet_slip']
+
+    ?>
   </div>
 
   <!-- Available Streams -->
@@ -76,3 +109,9 @@
   </div>
 
 </div>
+
+
+
+<?php
+  var_dump( $series->extra );
+?>

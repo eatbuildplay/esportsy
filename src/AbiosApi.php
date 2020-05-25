@@ -159,6 +159,10 @@ class AbiosApi {
 		}
 
 		$response = new \stdClass;
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
 		$response->raw = curl_exec( $curl );
 		$response->code = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
 
@@ -205,7 +209,11 @@ class AbiosApi {
     curl_setopt( $curl, CURLOPT_POST, 1 );
     $varsJson = json_encode( $vars );
     curl_setopt( $curl, CURLOPT_POSTFIELDS, http_build_query($vars) );
-    $response = new \stdClass;
+
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+		$response = new \stdClass;
     $response->raw = curl_exec( $curl );
     $response->data = json_decode( $response->raw );
     $response->code = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
