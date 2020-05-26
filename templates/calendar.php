@@ -21,6 +21,9 @@
 
   </header>
 
-  <section id="calendar-canvas"></section>
+  <section id="calendar-canvas">
+    <h5></h5>
+    <div></div>
+  </section>
 
 </div>

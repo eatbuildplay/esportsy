@@ -158,6 +158,27 @@ class plugin {
       true
     );
 
+    wp_enqueue_script(
+      'esportsy-skeleton-plugin-js',
+      ESPORTSY_URL . 'assets/avnSkeleton/avnPlugin.js',
+      array(),
+      true
+    );
+
+    wp_enqueue_script(
+      'esportsy-skeleton-js',
+      ESPORTSY_URL . 'assets/avnSkeleton/avnSkeleton.js',
+      array(),
+      true
+    );
+
+    wp_enqueue_style(
+      'esportsy-skeleton-css',
+      ESPORTSY_URL . 'assets/avnSkeleton/avnSkeleton.css',
+      array(),
+      true
+    );
+
     // main js
     wp_enqueue_script(
       'esportsy-main-js',

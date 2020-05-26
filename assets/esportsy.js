@@ -136,6 +136,22 @@
         var shortcode = 'default';
       }
 
+      // show skeleton
+      $loaderEl = $('#calendar-canvas');
+      $loaderEl.avnSkeleton({
+        header: {
+          selector: '> h5',
+          lines: 1,
+          icon: true,
+          loader: true
+        },
+        main: {
+          selector: '> div',
+          paragraphs: 1,
+          lines: 2
+        }
+      });
+
       // setup games filter
       var gameFilter = [];
       var $gamesSelected = $('.filter-menu li.selected');
@@ -161,9 +177,8 @@
       $.post( espy.ajaxurl, data, function( response ) {
 
         response = JSON.parse(response);
-        console.log( response )
 
-        calendar.canvas.html( response.html );
+        calendar.canvas.hide().html( response.html ).fadeIn(900);
 
         // show local times
         $('.calendar-series-col.col-3 .start-time').each(function( index, seriesTimeDiv ) {
