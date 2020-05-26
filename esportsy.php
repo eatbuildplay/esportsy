@@ -50,11 +50,14 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeCalendarHome.php' );
     new ShortcodeCalendarHome();
 
-    // register fields 
+    // register fields
     require_once( ESPORTSY_PATH . 'src/fields/fields.php' );
 
     // do init at init
     add_action('init', [$this, 'init']);
+
+    // custom cron schedules
+    add_filter( 'cron_schedules', [$this, 'cronSchedules'] );
 
   }
 
@@ -85,6 +88,22 @@ class plugin {
 
     $pt = new LogPostType;
     $pt->register();
+
+  }
+
+  public function cronSchedules( $schedules ) {
+
+    $schedules['every_five_minutes'] = array(
+      'interval' => 300,
+      'display'  => __( 'Every Five Minutes' ),
+    );
+
+    $schedules['every_fifteen_minutes'] = array(
+      'interval' => 900,
+      'display'  => __( 'Every Fifteen Minutes' ),
+    );
+
+    return $schedules;
 
   }
 
