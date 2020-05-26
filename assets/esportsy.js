@@ -19,7 +19,6 @@
         seriesTimeEl.text( local );
       }
 
-
       // localize time streams
       if( seriesTimeEl.length ) {
         var seriesTimeEl = $('.series-single .series-streams .datetime');
@@ -28,6 +27,20 @@
         var local = moment(startUtc).local().format('YYYY-MM-DD h:mmA');
         seriesTimeEl.text( local );
       }
+
+      // bet click
+      series.betClick();
+
+    },
+
+    betClick: function() {
+
+      $(document).on('click','.series-odds-list li', function() {
+        var betUrl = $(this).data('bet-url');
+        betUrl = betUrl.replace('{affiliate_tag}', '7483');
+        console.log(betUrl)
+        window.location.href = betUrl;
+      });
 
     },
 

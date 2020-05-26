@@ -1,7 +1,7 @@
 <div class="series-single">
 
   <!-- series header -->
-  <header>
+  <header class="main">
     <div class="col-first">
       <?php $series->renderGameLogo(); ?>
     </div>
@@ -51,17 +51,22 @@
       $oddsList = $series->extra->sportsbook_odds;
     ?>
 
+    <ul class="series-odds-list">
     <?php
 
       if( !empty( $oddsList )) :
         foreach( $oddsList as $odds ) :
-
+          $moneyline = $odds->moneyline;
     ?>
 
-    <h3><?php print $odds->sportsbook; ?></h3>
+      <li data-bet-url="<?php print $odds->link; ?>">
+        <div><?php print $moneyline->home; ?></div>
+        <div class="sportbook-site"><?php print $odds->sportsbook; ?></div>
+        <div><?php print $moneyline->away; ?></div>
+      </li>
 
-
-  <?php endforeach; endif; ?>
+    <?php endforeach; endif; ?>
+    </ul>
 
     <?php
 
@@ -113,5 +118,5 @@
 
 
 <?php
-  var_dump( $series->extra );
+  // var_dump( $series->extra );
 ?>

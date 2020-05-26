@@ -150,7 +150,7 @@ section {
  .series-single {
 
  }
-.series-single header {
+.series-single header.main {
    background: #000;
    color: #FFF;
    padding: 0 0 0 0;
@@ -159,14 +159,14 @@ section {
    grid-template-columns: 100px 450px auto;
    grid-column-gap: 25px;
  }
-.series-single header h1.tournament-title {
+.series-single header.main h1.tournament-title {
   font-size: 32px;
 }
-.series-single header .game-logo {
+.series-single header.main .game-logo {
   width: 100px;
   display: block;
 }
-.series-single header .col-third {
+.series-single header.main .col-third {
   text-align: right;
   padding: 40px 25px 0 30px;
 }
@@ -333,4 +333,53 @@ li.series-caster:hover {
   color: #27AE60;
   font-size: 11px;
   background: #FFFFFF5B;
+}
+
+
+/* Series Odds */
+.series-odds {
+  background: #F5F5F5;
+  padding: 0 0 30px 0;
+}
+.series-odds header {
+  text-align: center;
+  background: #000;
+  margin-bottom: 20px;
+  padding: 18px 15px;
+}
+.series-odds header h2 {
+  font-size: 46px;
+  color: #FFF;
+  margin: 0;
+}
+
+.series-odds-list,
+.series-odds-list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.series-odds-list li {
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr;
+  grid-column-gap: 15px;
+  min-width: 720px;
+  padding: 15px 0;
+  cursor: pointer;
+}
+.series-odds-list li:hover {
+  background: #74bfdb;
+}
+.series-odds-list li div:first-child {
+  text-align: right;
+}
+.series-odds-list li div {
+  font-size: 30px;
+}
+.series-odds-list li div.sportbook-site {
+  text-transform: uppercase;
+  padding-top: 6px;
+  text-align: center;
+  font-size: 22px;
+  color: #686868;
 }
