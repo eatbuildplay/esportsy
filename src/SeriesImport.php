@@ -104,6 +104,7 @@ class SeriesImport {
   public function makeSeries( $seriesData ) {
 
     $series = new Series();
+    $series->data = $seriesData;
 
     $series->seriesId = $seriesData->id;
     $series->title = $seriesData->title;

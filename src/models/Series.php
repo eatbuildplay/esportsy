@@ -18,6 +18,7 @@ class Series {
   public $teamA;
   public $teamB;
   public $streams;
+  public $data; // full response data
 
   public function create() {
 
@@ -51,10 +52,8 @@ class Series {
 
   public function save() {
 
+    // save post
     if( $this->id > 0 || $this->exists() ) {
-
-
-
       $this->id = $this->update();
     } else {
       $this->id = $this->create();
@@ -63,6 +62,7 @@ class Series {
       }
     }
 
+    // save field data
     update_post_meta( $this->id, 'series_id', $this->seriesId );
     update_post_meta( $this->id, 'title', $this->seriesId );
     update_post_meta( $this->id, 'start', $this->start );
@@ -74,6 +74,7 @@ class Series {
     update_post_meta( $this->id, 'game_logo', $this->gameLogo );
     update_post_meta( $this->id, 'team_a', $this->teamA );
     update_post_meta( $this->id, 'team_b', $this->teamB );
+    update_post_meta( $this->id, 'data', $this->data );
 
   }
 
@@ -166,6 +167,8 @@ class Series {
     if( $now >= $seriesStart && !$series->isOver ) {
       $series->live = 1;
     }
+
+    $series->data = get_post_meta( $seriesPost->ID, 'data', 1 );
 
     return $series;
   }
