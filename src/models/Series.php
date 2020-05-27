@@ -136,7 +136,8 @@ class Series {
 
     $seriesList = [];
     foreach( $seriesPosts as $seriesPost ) {
-      $seriesList[] = self::loadFromPost( $seriesPost );
+      $series = self::loadFromPost( $seriesPost );
+      $seriesList[] = $series;
     }
 
     return $seriesList;

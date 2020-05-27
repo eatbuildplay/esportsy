@@ -33,6 +33,28 @@
 
     },
 
+    oddsFractional: function() {
+
+      var gcd = function(a, b) {
+        if (b < 0.0000001) return a;
+        return gcd(b, Math.floor(a % b));
+      };
+
+      var fraction = 1.00;
+      var len = fraction.toString().length - 2;
+
+      var denominator = Math.pow(10, len);
+      var numerator = fraction * denominator;
+
+      var divisor = gcd(numerator, denominator);
+
+      numerator /= divisor;
+      denominator /= divisor;
+
+      alert(Math.floor(numerator) + '/' + Math.floor(denominator));
+
+    },
+
     betClick: function() {
 
       $(document).on('click','.series-odds-list li', function() {
