@@ -55,6 +55,7 @@ class plugin {
 
     // do init at init
     add_action('init', [$this, 'init']);
+    add_action('init', [$this, 'optionsPages'], 20);
 
     // custom cron schedules
     add_filter( 'cron_schedules', [$this, 'cronSchedules'] );
@@ -88,6 +89,45 @@ class plugin {
 
     $pt = new LogPostType;
     $pt->register();
+
+  }
+
+  public function optionsPages() {
+
+    // main dashboard
+    \acf_add_options_page(array(
+      'page_title' 	=> 'eSportsy',
+      'menu_title'	=> 'eSportsy',
+      'menu_slug' 	=> 'esportsy',
+      'position'    => 5,
+      'icon_url'    => 'dashicons-networking',
+      'capability'	=> 'edit_posts',
+      'redirect'		=> false
+    ));
+
+    \add_submenu_page(
+      'esportsy',
+      'Matches',
+      'Matches',
+      'edit_posts',
+      'edit.php?post_type=series'
+    );
+
+    \add_submenu_page(
+      'esportsy',
+      'Games',
+      'Games',
+      'edit_posts',
+      'edit.php?post_type=game'
+    );
+
+    \add_submenu_page(
+      'esportsy',
+      'Abios Sync',
+      'Abios Sync',
+      'edit_posts',
+      'edit.php?post_type=sync_instance'
+    );
 
   }
 
