@@ -66,7 +66,8 @@ class AbiosApi {
       'with' => array(
 				'matches',
 				'tournament',
-				'sportsbook_odds'
+				'sportsbook_odds',
+				'casters'
 			),
 			'games' => $gameIds,
 			'starts_after' => $start,

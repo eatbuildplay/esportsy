@@ -18,10 +18,12 @@ class ShortcodeSeriesSingle extends Shortcode {
     global $post;
     $series = \Esportsy\Series::loadFromPost( $post );
 
-    $api = new \Esportsy\AbiosApi();
-    $series->extra = $api->fetchSeries( $series->seriesId );
+    if( !$series->data ) {
+      $api = new \Esportsy\AbiosApi();
+      $series->data = $api->fetchSeries( $series->seriesId );
+    }
 
-    $series->loadStreams( $series->extra->casters );
+    $series->loadStreams( $series->data->casters );
 
     return [
       'series' => $series
