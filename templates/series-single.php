@@ -5,7 +5,7 @@
     <div class="col-first">
       <?php $series->renderGameLogo(); ?>
     </div>
-    <div>
+    <div class="col-second">
       <h1 class="tournament-title">
         <?php print $series->tournamentTitle; ?>
       </h1>
@@ -45,13 +45,11 @@
     $oddsList = $series->data->sportsbook_odds;
     if( !empty( $oddsList )) :
   ?>
-    <div class="series-odds">
+    <div class="series-odds series-section">
 
     <header>
       <h2>Place Your Bets</h2>
     </header>
-
-
 
     <ul class="series-odds-list">
     <?php
@@ -70,48 +68,39 @@
     <?php endforeach; endif; ?>
     </ul>
 
-    <?php
-
-      // pass me $odds;
-
-      // $odds['sportsbook'] uppercase it
-      // $odds['link'] replace {affiliate_tag}
-      // $moneyline = $odds['moneyline']
-      // $moneyline['home']
-      // $moneyline['home_bet_slip']
-      // $moneyline['away']
-      // $moneyline['away_bet_slip']
-
-    ?>
   </div>
   <?php endif; // close check if any odds available ?>
 
   <!-- Available Streams -->
-  <div class="series-streams">
-    <div class="col-first">
+  <div class="series-streams series-section">
+    <header>
       <h2 class="series-stream-title">Event Live Stream</h2>
-    </div>
-    <div class="col-second">
+    </header>
+    <div class="stream-wrap">
       <?php $series->renderStream(); ?>
     </div>
   </div>
 
   <!-- Tournament Info -->
-  <div class="series-tournament-info">
+  <div class="series-tournament-info series-section">
 
-    <div class="col-first">
+    <header>
       <h2 class="series-tournament-info-title">Tournament Info</h2>
-    </div>
+    </header>
 
-    <div class="col-second">
-      <img src="<?php print $series->data->tournament->images->default; ?>" />
-      <h3><?php print str_replace(' ', '', $series->data->tournament->prizepool_string->total); ?></h3>
-    </div>
+    <div class="series-section-content">
 
-    <div class="col-third">
-      <h1><?php print $series->data->tournament->title; ?></h1>
-      <h4>From <?php print $series->data->tournament->start; ?> to <?php print $series->data->tournament->end; ?></h4>
-      <p><?php print $series->data->tournament->description; ?></p>
+      <div class="col-first">
+        <img src="<?php print $series->data->tournament->images->default; ?>" />
+      </div>
+
+      <div class="col-second">
+        <h1><?php print $series->data->tournament->title; ?></h1>
+        <h3><?php print str_replace(' ', '', $series->data->tournament->prizepool_string->total); ?></h3>
+        <h3>From <?php print $series->data->tournament->start; ?> to <?php print $series->data->tournament->end; ?></h3>
+        <p><?php print $series->data->tournament->description; ?></p>
+      </div>
+
     </div>
 
   </div>

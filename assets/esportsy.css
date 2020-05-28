@@ -156,11 +156,17 @@ section {
    padding: 0 0 0 0;
    margin: 0;
    display: grid;
-   grid-template-columns: 100px 450px auto;
+   grid-template-columns: 100px minmax(200px, 3fr) minmax(200px, 2fr);
    grid-column-gap: 25px;
+ }
+ .series-single header.main .col-second {
+   position: relative;
  }
 .series-single header.main h1.tournament-title {
   font-size: 32px;
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
 }
 .series-single header.main .game-logo {
   width: 100px;
@@ -176,14 +182,14 @@ section {
   background: #29ABDD;
   padding: 25px 0;
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 3fr 2fr 3fr;
   grid-column-gap: 25px;
 }
-.series-matchup > div {
-
-}
 .series-matchup > div:first-child {
-  text-align: right;
+  margin-left: 200px;
+}
+.series-matchup > div:last-child {
+  margin-right: 200px;
 }
 .series-matchup .matchup-score {
   font-size: 50px;
@@ -192,23 +198,19 @@ section {
   padding: 40px 0 20px 0;
 }
 .series-matchup .matchup-team {
-
+  text-align: center;
+}
+.series-matchup .matchup-team h3 {
+  font-size: 18px;
+  color: #FFF;
+  margin: 10px 0 6px;
 }
 .series-matchup .matchup-team img {
   width: 80px;
 }
 
 .series-streams {
-  background: #F0F1F5;
-  padding: 25px;
-  margin: 0;
-  text-align: left;
-}
-.series-streams h2.series-stream-title {
-  color: #2AABDD;
-  font-size: 28px;
-  margin: 0 0 25px 0;
-  font-weight: 400;
+
 }
 .series-streams ul {
   list-style: none;
@@ -231,43 +233,27 @@ li.series-caster:hover {
   color: #212121;
   margin: 0;
 }
-
-.series-tournament-info {
-  background: #29ABDD;
-  margin: 0;
+.series-tournament-info .series-section-content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  color: #FFF;
+  grid-template-columns: 2fr 3fr;
+  grid-column-gap: 25px;
 }
 .series-tournament-info .col-first {
-  grid-column: 1 / 3;
-  grid-row: 1;
-  background: #000000;
-  color: #FFF;
-  padding: 10px 20px 10px 40px;
+  padding: 60px 50px;
 }
-.series-tournament-info .col-second {
-  grid-column: 1;
-  grid-row: 2;
-  padding: 10px 20px 10px 40px;
-}
-.series-tournament-info .col-second img {
+.series-tournament-info .col-first img {
   max-width: 100%;
   display: block;
 }
-.series-tournament-info .col-second h3 {
-  font-weight: 400;
-  font-size: 26px;
-  margin: 12px 0 0 0;
-  text-align: center;
+.series-tournament-info .col-second {
+  padding: 60px 50px 60px 0;
 }
-.series-tournament-info .col-third {
-  grid-column: 2;
-  grid-row: 2;
-  padding: 0 0 30px 30px;
-}
-.series-tournament-info .col-third h1 {
+.series-tournament-info .col-second h1 {
   font-size: 32px;
+}
+.series-tournament-info .col-second h3 {
+  font-size: 24px;
+  margin: 20px 0 20px;
 }
 
 /*
@@ -335,24 +321,24 @@ li.series-caster:hover {
   background: #FFFFFF5B;
 }
 
-
-/* Series Odds */
-.series-odds {
+/* Series Sections */
+.series-section {
   background: #F5F5F5;
   padding: 0 0 30px 0;
 }
-.series-odds header {
+.series-section header {
   text-align: center;
-  background: #000;
+  background: #282828;
   margin-bottom: 20px;
   padding: 18px 15px;
 }
-.series-odds header h2 {
-  font-size: 46px;
-  color: #FFF;
-  margin: 0;
+.series-section header h2 {
+  font-size: 34px;
+  color: #C8C8C8;
+  margin: 20px 0 0 0;
 }
 
+/* Series Odds */
 .series-odds-list,
 .series-odds-list li {
   list-style: none;
@@ -362,7 +348,7 @@ li.series-caster:hover {
 .series-odds-list li {
   display: grid;
   grid-template-columns: 3fr 1fr 3fr;
-  grid-column-gap: 15px;
+  grid-column-gap: 20px;
   min-width: 720px;
   padding: 15px 0;
   cursor: pointer;
@@ -382,4 +368,8 @@ li.series-caster:hover {
   text-align: center;
   font-size: 22px;
   color: #686868;
+}
+
+.stream-wrap h3 {
+  padding: 60px 50px;
 }
