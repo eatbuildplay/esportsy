@@ -117,6 +117,11 @@ class Series {
         'key'     => 'is_over',
         'value'   => 0,
       ];
+      $query['meta_query'][] = [
+        'key'     => 'start',
+        'value'   => '',
+        'compare' => '!='
+      ];
       $query['order'] = 'ASC';
       $query['orderby'] = 'meta_value';
       $query['meta_key'] = 'start';
@@ -126,6 +131,11 @@ class Series {
       $query['meta_query'][] = [
         'key'     => 'is_over',
         'value'   => 1,
+      ];
+      $query['meta_query'][] = [
+        'key'     => 'start',
+        'value'   => '',
+        'compare' => '!='
       ];
       $query['order'] = 'DESC';
       $query['orderby'] = 'meta_value';
