@@ -5,7 +5,6 @@ namespace Esportsy;
 class AbiosApi {
 
 	public $baseUrl = 'https://api.abiosgaming.com/v2';
-	public $token = '0a89946531255dec79cb5c26b0c2c2bc48862fc9008503bd202536fb6d02e7c4';
 
 	/*
 	 * Constructor sets the api key saved in settings
@@ -191,8 +190,6 @@ class AbiosApi {
  	}
 
   public function fetchToken() {
-
-		// return $this->token;
 
     $vars = [
       'grant_type' => 'client_credentials',
