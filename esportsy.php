@@ -5,7 +5,7 @@
  * Plugin Name: eSportsy
  * Plugin URI: https://esportsy.com/
  * Description: Custom plugin to power eSportsy.com.
- * Version: 1.3.4
+ * Version: 1.6.2
  * Author: Casey Milne, Eat/Build/Play
  * Author URI: https://eatbuildplay.com/
  * License: GPL3
@@ -17,7 +17,7 @@ namespace Esportsy;
 
 define( 'ESPORTSY_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ESPORTSY_URL', plugin_dir_url( __FILE__ ) );
-define( 'ESPORTSY_VERSION', '1.5.1' );
+define( 'ESPORTSY_VERSION', '1.7.5' );
 
 class plugin {
 
@@ -168,6 +168,14 @@ class plugin {
       'esportsy-main-css',
       ESPORTSY_URL . 'assets/esportsy.css',
       array(),
+      ESPORTSY_VERSION
+    );
+
+    // main css
+    wp_enqueue_style(
+      'esportsy-mobile-css',
+      ESPORTSY_URL . 'assets/esportsy-mobile.css',
+      array('esportsy-main-css'),
       ESPORTSY_VERSION
     );
 

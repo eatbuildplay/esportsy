@@ -1,0 +1,48 @@
+@media screen and (max-width: 500px) {
+
+  .calendar-series-col.col-1 {
+    position: relative;
+  }
+  .calendar-series-col.col-1 img {
+    max-width: 40px;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+  }
+  .espy-calendar-home .calendar-series {
+    grid-template-columns: 40px auto;
+    grid-column-gap: 15px;
+  }
+  .calendar-series-col.col-2 {
+    padding: 14px 0 14px 0;
+  }
+  .calendar-series-col.col-2 h1 span {
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+} /* end 500px breakpoint */
+
+@media screen and (max-width: 800px) {
+
+  .espy-calendar header {
+    grid-template-columns: 100%;
+  }
+
+  .espy-calendar .header-left {
+    padding: 15px 0 15px 0;
+    text-align: center;
+  }
+
+  .espy-calendar .header-right {
+    padding: 15px 0 15px 0;
+    margin: 25px 0 0 0;
+    text-align: center !important;
+  }
+
+  .espy-calendar .header-right img {
+    margin-bottom: 6px;
+  }
+
+}
