@@ -31,27 +31,54 @@
       // bet click
       series.betClick();
 
+      // fractional odds
+      series.oddsFractional();
+      series.oddsSwitch();
+
+    },
+
+    oddsSwitch: function() {
+      $('#odds-switch input').on('change', function() {
+        var $oddsListEl = $('.series-odds-list .odds-item');
+        $.each( $oddsListEl, function( index, value ) {
+          var alternate = $(this).data('alternate');
+          var current = $(this).text();
+          $(this).text( alternate );
+          $(this).data('alternate', current);
+        });
+      });
     },
 
     oddsFractional: function() {
 
-      var gcd = function(a, b) {
-        if (b < 0.0000001) return a;
-        return gcd(b, Math.floor(a % b));
-      };
+      var $oddsListEl = $('.series-odds-list .odds-item');
 
-      var fraction = 1.00;
-      var len = fraction.toString().length - 2;
+      $.each( $oddsListEl, function( index, value ) {
 
-      var denominator = Math.pow(10, len);
-      var numerator = fraction * denominator;
+        var gcd = function(a, b) {
+          if (b < 0.0000001) return a;
+          return gcd(b, Math.floor(a % b));
+        };
 
-      var divisor = gcd(numerator, denominator);
+        var fraction = $(value).text();
+        $(this).data('alternate', fraction);
+        var len = fraction.toString().length - 2;
 
-      numerator /= divisor;
-      denominator /= divisor;
+        var denominator = Math.pow(10, len);
+        var numerator = fraction * denominator;
 
-      alert(Math.floor(numerator) + '/' + Math.floor(denominator));
+        var divisor = gcd(numerator, denominator);
+
+        numerator /= divisor;
+        denominator /= divisor;
+
+        var oddsFraction = Math.floor(numerator) + '/' + Math.floor(denominator)
+
+        $(this).text( oddsFraction )
+
+      })
+
+
 
     },
 

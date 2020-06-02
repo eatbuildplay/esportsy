@@ -51,6 +51,11 @@
       <h2>Place Your Bets</h2>
     </header>
 
+    <div id="odds-switch">
+      <h5>Decimal Odds</h5><input type="checkbox" id="switch" /><label for="switch">Decimal Odds</label>
+    </div>
+
+
     <ul class="series-odds-list">
     <?php
 
@@ -59,10 +64,11 @@
           $moneyline = $odds->moneyline;
     ?>
 
+
       <li data-bet-url="<?php print $odds->link; ?>">
-        <div><?php print $moneyline->home; ?></div>
+        <div class="odds-item"><?php print $moneyline->home; ?></div>
         <div class="sportbook-site"><?php print $odds->sportsbook; ?></div>
-        <div><?php print $moneyline->away; ?></div>
+        <div class="odds-item"><?php print $moneyline->away; ?></div>
       </li>
 
     <?php endforeach; endif; ?>
