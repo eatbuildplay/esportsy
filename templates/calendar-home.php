@@ -23,4 +23,6 @@
 
   <section id="calendar-canvas"></section>
 
+  <a class="view-all-button" href="https://esportsy.com/calendar/">View All Matches</a>
+
 </div>

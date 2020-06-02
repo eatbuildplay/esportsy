@@ -356,3 +356,18 @@ li.series-caster:hover {
 .stream-wrap h3 {
   padding: 60px 50px;
 }
+
+/* View all button */
+.view-all-button {
+  text-align: center;
+  display: block;
+  background: #353535;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 35px;
+  color: #FFF;
+  text-decoration: none;
+}
+.view-all-button:hover {
+  color: #DDD;
+}
