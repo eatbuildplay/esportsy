@@ -271,4 +271,44 @@ class Series {
     }
   }
 
+  public function renderTeamName( $team ) {
+    if($team=='a') {
+      $index=0;
+      $teamName = $this->teamA;
+    }
+    if($team=='b') {
+      $index=1;
+      $teamName = $this->teamB;
+    }
+
+    if( $teamName == 'TBD' ) {
+      if(isset( $this->data->rosters[$index]->players[0] )) {
+        $player = $this->data->rosters[$index]->players[0];
+        print $player->nick_name;
+      } else {
+        print 'TBD';
+      }
+    } else {
+      print $teamName;
+    }
+  }
+
+  public function renderTeamImage( $team ) {
+    if($team=='a') {
+      $index=0;
+      $teamName = $this->teamA;
+    }
+    if($team=='b') {
+      $index=1;
+      $teamName = $this->teamB;
+    }
+
+    if( $teamName == 'TBD' ) {
+      print $this->data->rosters[$index]->players[0]->country->images->default;
+    } else {
+      print $this->data->rosters[$index]->teams[0]->images->default;
+    }
+
+  }
+
 }

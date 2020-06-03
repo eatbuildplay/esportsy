@@ -1,3 +1,4 @@
+
 <div class="series-single">
 
   <!-- series header -->
@@ -19,8 +20,8 @@
   <div class="series-matchup">
 
     <div class="matchup-team team-a">
-      <h3><?php print $series->teamA; ?></h3>
-      <img src="<?php print $series->data->rosters[0]->teams[0]->images->default; ?>" />
+      <h3><?php $series->renderTeamName('a'); ?></h3>
+      <img src="<?php $series->renderTeamImage('a') ?>" />
     </div>
 
     <div class="matchup-score">
@@ -35,8 +36,8 @@
     </div>
 
     <div class="matchup-team team-b">
-      <h3><?php print $series->teamB; ?></h3>
-      <img src="<?php print $series->data->rosters[1]->teams[0]->images->default; ?>" />
+      <h3><?php $series->renderTeamName('b'); ?></h3>
+      <img src="<?php $series->renderTeamImage('b') ?>" />
     </div>
   </div>
 
@@ -116,5 +117,5 @@
 
 
 <?php
-  // var_dump( $series->data );
+  var_dump( $series->data->rosters[1]->players[0]->country );
 ?>
