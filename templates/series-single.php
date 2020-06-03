@@ -117,5 +117,5 @@
 
 
 <?php
-  var_dump( $series->data->rosters[1]->players[0]->country );
+  // var_dump( $series->data->rosters[1]->players[0] );
 ?>

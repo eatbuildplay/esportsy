@@ -4,7 +4,9 @@
 
   <div class="calendar-series-col col-2">
     <h5><?php print $series->gameTitle; ?> / <?php print $series->tournamentTitle; ?> / <?php print $series->title; ?></h5>
-    <h1><?php print $series->teamA; ?> vs. <?php print $series->teamB; ?></h1>
+    <h1>
+      <?php $series->renderTeamName('a') ?> vs. <?php print $series->renderTeamName('b') ?>
+    </h1>
   </div>
 
   <div class="calendar-series-col col-3">
