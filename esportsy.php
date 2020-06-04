@@ -50,6 +50,9 @@ class plugin {
     require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeCalendarHome.php' );
     new ShortcodeCalendarHome();
 
+    require_once( ESPORTSY_PATH . 'src/shortcodes/ShortcodeCalendarSidebar.php' );
+    new ShortcodeCalendarSidebar();
+
     // register fields
     require_once( ESPORTSY_PATH . 'src/fields/fields.php' );
 
