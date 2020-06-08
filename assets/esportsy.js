@@ -181,6 +181,8 @@
       var calendarEl = $('.espy-calendar');
       if( calendarEl.hasClass('espy-calendar-home')) {
         var shortcode = 'home';
+      } else if ( calendarEl.hasClass('espy-calendar-sidebar') ) {
+        var shortcode = 'sidebar';
       } else {
         var shortcode = 'default';
       }

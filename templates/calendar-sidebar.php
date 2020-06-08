@@ -1,4 +1,4 @@
-<div class="espy-calendar espy-calendar-home">
+<div class="espy-calendar espy-calendar-sidebar">
 
   <header>
 

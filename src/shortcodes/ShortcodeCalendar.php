@@ -37,6 +37,8 @@ class ShortcodeCalendar extends Shortcode {
 
     if( $shortcode == 'home' ) {
       $template->name = 'calendar-home-series';
+    } elseif( $shortcode == 'sidebar' ) {
+      $template->name = 'calendar-sidebar-series';
     } else {
       $template->name = 'calendar-series';
     }
