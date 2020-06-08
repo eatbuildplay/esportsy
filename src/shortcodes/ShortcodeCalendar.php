@@ -65,7 +65,7 @@ class ShortcodeCalendar extends Shortcode {
 
   public function fetchSeriesList( $games, $schedule, $shortcode ) {
 
-    if( $shortcode == 'home' ) {
+    if( $shortcode == 'home' || $shortcode == 'sidebar' ) {
       $limit = 10;
     } else {
       $limit = 50;

@@ -1,11 +1,6 @@
-.espy-calendar {
-
-}
-
 /*
  * Logo blue: #2AACDE
  */
-
 .calendar-series {
   color: #000;
   font-weight: normal;
@@ -423,4 +418,69 @@ li.series-caster:hover {
 }
 #odds-switch input + label {
   margin: -18px 0 0 0;
+}
+
+/* Sidebar Calendar */
+.espy-calendar-sidebar {
+  width: 100%;
+  max-width: 320px;
+}
+.espy-calendar-sidebar header {
+  display: block;
+  margin: 0 0 0 0;
+  border-top-width: 6px;
+  padding: 0 0 0 0;
+}
+.espy-calendar-sidebar .header-left,
+.espy-calendar-sidebar .header-right {
+  width: 100%;
+  text-align: center;
+}
+.espy-calendar-sidebar .header-left {
+  margin: 0 0 25px 0;
+}
+.espy-calendar-sidebar ul.top-menu li {
+  margin: 0 8px;
+}
+.espy-calendar-sidebar .filter-menu {
+  padding: 0 0 20px 0;
+}
+.espy-calendar-sidebar .filter-menu li {
+  margin: 0 5px;
+}
+.espy-calendar-sidebar .filter-menu li img {
+  width: 30px;
+}
+.espy-calendar-sidebar .calendar-series {
+  display: block;
+  text-align: center;
+}
+.espy-calendar-sidebar .calendar-series h5 {
+  font-size: 0.55em;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+}
+.espy-calendar-sidebar .calendar-series h1 {
+  font-size: 0.75em;
+  font-weight: 600;
+  margin: 0;
+}
+.espy-calendar-sidebar .calendar-series img {
+  width: 50px;
+}
+
+.espy-calendar-sidebar .sidebar-col-1 {
+  position: relative;
+  background: #000000;
+}
+.espy-calendar-sidebar .sidebar-col-1 span {
+  position: absolute;
+  right: 8px;
+  top: 14px;
+  font-size: 0.65em;
+  color: #99999D;
+}
+.espy-calendar-sidebar .sidebar-col-2 {
+  max-width: 170px;
+  padding: 8px 0;
 }
